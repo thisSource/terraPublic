@@ -1,8 +1,15 @@
+import config from "../../../config";
 import fetchAccessToken from "../../../lib/tink/accessToken";
 import { stubRequest } from "../../../mocks/server";
 jest.mock("../../../config", () => ({
   __esModule: true,
-  default: { tink: { clientId: "hello", clientSecret: "world" } },
+  default: {
+    tink: {
+      clientId: "hello",
+      clientSecret: "world",
+      apiBaseUrl: "https://api.tink.com/",
+    },
+  },
 }));
 
 describe("tink/accessToken", () => {
