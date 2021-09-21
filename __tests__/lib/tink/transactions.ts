@@ -1,0 +1,78 @@
+import TinkClient, { HttpError } from "../../../lib/tink/tinkClient";
+import { fetchTransactions } from "../../../lib/tink/transactions";
+jest.mock("../../../lib/tink/tinkClient", () => {
+  const mockGet = jest.fn();
+  return { client: { get: mockGet }, get: mockGet };
+});
+
+const transactionsReturnValue = {
+  nextPageToken: "string",
+  transactions: [
+    {
+      accountId: "4a2945d1481c4f4b98ab1b135afd96c0",
+      amount: {
+        currencyCode: "GBP",
+        value: {
+          scale: "1",
+          unscaledValue: "-1300",
+        },
+      },
+      bookedDateTime: "2020-12-15T09:25:12Z",
+      categories: {
+        pfm: {
+          id: "d8f37f7d19c240abb4ef5d5dbebae4ef",
+          name: "",
+        },
+      },
+      dates: {
+        booked: "2020-12-15",
+        value: "2020-12-15",
+      },
+      descriptions: {
+        display: "Tesco",
+        original: "TESCO STORES 3297",
+      },
+      id: "d8f37f7d19c240abb4ef5d5dbebae4ef",
+      identifiers: {
+        providerTransactionId: "500015d3-acf3-48cc-9918-9e53738d3692",
+      },
+      merchantInformation: {
+        merchantCategoryCode: "string",
+        merchantName: "string",
+      },
+      providerMutability: "MUTABILITY_UNDEFINED",
+      reference: "string",
+      status: "BOOKED",
+      types: {
+        financialInstitutionTypeCode: "DEB",
+        type: "DEFAULT",
+      },
+      valueDateTime: "2020-12-15T09:25:12Z",
+    },
+  ],
+};
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
+
+describe("tink/transactions", () => {
+  it("fetch transactions from a users bankaccount", async () => {
+    const MockTinkClient = TinkClient as jest.MockedClass<any>;
+    const spy = jest
+      .spyOn(MockTinkClient, "get")
+      .mockResolvedValue(transactionsReturnValue);
+    const accessToken = "an_access_token";
+    const data = await fetchTransactions(accessToken);
+    expect(spy).toHaveBeenCalledWith("/data/v2/transactions", {
+      headers: {
+        authorization: "Bearer an_access_token",
+      },
+    });
+
+    expect(data.transactions).toHaveLength(1);
+    expect(data.transactions[0].accountId).toEqual(
+      "4a2945d1481c4f4b98ab1b135afd96c0"
+    );
+  });
+});
