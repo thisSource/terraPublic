@@ -21,7 +21,7 @@ export const stubRequest = (method: HttpMethods, url: string | URL) => {
   let mock = jest.fn();
   const path = typeof url === "string" ? url : url.toString();
 
-  const defaultResponse = (_, res, ctx) => {
+  const defaultResponse = (_: any, res: any, ctx: any) => {
     mock();
     return res(ctx.json(null));
   };
