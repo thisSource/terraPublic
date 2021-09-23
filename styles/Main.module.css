@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+.mainContainer {
+    background-color: #fce697;
+    margin: 5% 25% 1% 35%;
+}
+
+.navbar{
+    font-family: 'Secular One', sans-serif;
+    background-color: #fce697;
+    border-bottom: 1px solid #262626;
+    display: flex;
+    height: 3.5rem;
+    align-items: center;
+}
+
+
+.navbar > .logo{
+    color: #262626;
+    font-size: 2em;
+    margin-left: 15%;
+    font-weight: 1000;
+    flex: 1;
+}
+
+.navbar > .myaccount {
+margin-left: auto;
+padding-right: 5%;
+}
+
+.navbar > .fund {
+    margin-right: 15%;
+    }
