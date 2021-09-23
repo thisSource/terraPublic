@@ -23,7 +23,7 @@ describe("tink/accessToken", () => {
     )
       .with({
         // todo: Find a way to make this matching body deterministically
-        body: "client_id=hello&client_secret=world&code=123&grant_type=authorization_code",
+        body: "client_id=hello&client_secret=world&grant_type=authorization_code&code=123",
       })
       .toReturn({ body: { accessToken: "my_access_token" } })
       .use();
@@ -31,5 +31,29 @@ describe("tink/accessToken", () => {
     const token = await fetchAccessToken("123");
     expect(request).toHaveBeenCalled();
     expect(token).toEqual({ accessToken: "my_access_token" });
+  });
+
+  it("refreshes token", async () => {
+    const request = stubRequest(
+      "post",
+      "https://api.tink.com/api/v1/oauth/token"
+    )
+      .with({
+        body: "client_id=hello&client_secret=world&grant_type=refresh_token&refresh_token=123",
+      })
+      .toReturn({
+        body: {
+          refresh_token: "my_refresh_token",
+          access_token: "my_access_token",
+        },
+      })
+      .use();
+
+    const token = await fetchAccessToken("123", "refreshToken");
+    expect(request).toHaveBeenCalled();
+    expect(token).toEqual({
+      access_token: "my_access_token",
+      refresh_token: "my_refresh_token",
+    });
   });
 });

@@ -42,18 +42,31 @@ export interface OAuth2AuthenticationTokenResponse {
   token_type: string;
 }
 
+const grants = {
+  authorizationCode: "authorization_code",
+  refreshToken: "refresh_token",
+} as const;
+
 /**
  * @throws Response
  */
 export default async function fetchAccessToken(
-  code: string
+  code: string,
+  grant?: keyof typeof grants
 ): Promise<OAuth2AuthenticationTokenResponse> {
   const payload: Partial<AuthTokenPayload> = {
     client_id: config.tink.clientId,
     client_secret: config.tink.clientSecret,
-    code: code,
-    grant_type: "authorization_code",
+    grant_type: grant ? grants[grant] : grants.authorizationCode,
   };
+
+  if (!grant || grants[grant] === grants.authorizationCode) {
+    payload.code = code;
+  }
+
+  if (grant && grants[grant] === grants.refreshToken) {
+    payload.refresh_token = code;
+  }
 
   const getAuthTokenPath = "/api/v1/oauth/token";
   const response = await TinkClient.client.post(getAuthTokenPath, {
