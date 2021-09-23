@@ -1,7 +1,8 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
 import config from "../config";
-import { ListTransactionsResponse } from "../lib/tink/transactions";
+import { useAccounts } from "../lib/hooks/useAccounts";
+import { useTransactions } from "../lib/hooks/useTransactions";
+import { ListAccountsResponse } from "../lib/tink/accounts";
 import withSession, { ServerSideHandler } from "../lib/withSession";
 import styles from "../styles/Home.module.css";
 
@@ -20,42 +21,32 @@ function getTinkLinkUrl() {
   return `${base.toString()}?${params.toString()}`;
 }
 
-const handler: ServerSideHandler = async ({ req, res }) => {
-  const token = req.session.get("token");
-  if (token) {
-    return {
-      props: { token },
-    };
-  } else {
-    return {
-      props: { token: false },
-    };
-  }
+const handler: ServerSideHandler = async ({ req }) => {
+  const token = req.session.get<String>("token");
+  return {
+    props: { token },
+  };
 };
+
 export const getServerSideProps = withSession<ServerSideHandler>(handler);
 
-export default function Home(props: { token?: string }) {
-  const [token, setToken] = useState(props.token);
-  const [transactions, setTransactions] = useState<ListTransactionsResponse>();
-  const [error, setError] = useState();
+function AccountsList(props: { accounts: ListAccountsResponse["accounts"] }) {
+  return (
+    <ul>
+      {props.accounts.map((account) => (
+        <li key={account.id}>
+          {account.name}{" "}
+          {Number(account.balances.booked.amount.value.unscaledValue) /
+            Math.pow(10, Number(account.balances.booked.amount.value.scale))}
+          {account.balances.booked.amount.currencyCode}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-  useEffect(() => {
-    if (token) {
-      fetch("/api/transactions")
-        .then((resp) => {
-          if (!resp.ok) {
-            if (resp.status === 401) {
-              setToken("");
-            }
-            throw new Error(resp.statusText);
-          }
-          return resp;
-        })
-        .then((resp) => resp.json())
-        .then((x) => setTransactions(x as ListTransactionsResponse))
-        .catch((err) => setError(err.toString()));
-    }
-  }, [token]);
+export default function Home() {
+  const { data, error, isLoading } = useAccounts();
 
   return (
     <div className={styles.container}>
@@ -65,17 +56,17 @@ export default function Home(props: { token?: string }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {!token ? (
-        <main className={styles.main}>
+      <main className={styles.main}>
+        {isLoading ? "laddar konton" : null}
+        {!data ? (
           <a className={styles.button} href={getTinkLinkUrl()}>
             Connect account
           </a>
-        </main>
-      ) : (
-        <pre>{JSON.stringify(transactions?.transactions, null, 2)}</pre>
-      )}
-
-      {error ? <div className={styles.errorBox}>{error}</div> : null}
+        ) : (
+          <AccountsList accounts={data.accounts} />
+        )}
+        {error ? <div className={styles.errorBox}>{error.message}</div> : null}
+      </main>
     </div>
   );
 }

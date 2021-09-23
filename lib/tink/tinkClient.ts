@@ -1,4 +1,5 @@
 import "next"; // polyfills fetch via next
+import config from "../../config";
 
 type TinkInit = {
   baseUrl: string | URL;
@@ -38,7 +39,7 @@ export default class TinkClient {
   }
 
   constructor(init?: TinkInit) {
-    this.baseUrl = init?.baseUrl ?? "https://api.tink.com/";
+    this.baseUrl = init?.baseUrl ?? config.tink.apiBaseUrl;
   }
 
   async get(path: string, options?: Pick<RequestOptions, "headers">) {
