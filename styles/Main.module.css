@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 
 .mainContainer {
-    background-color: #fce697;
     margin: 5% 25% 1% 35%;
 }
 
@@ -30,4 +29,75 @@ padding-right: 5%;
 
 .navbar > .fund {
     margin-right: 15%;
+    }
+
+.balanceContainer{
+    display: flex;
+    margin-bottom: 5%;
+    flex-direction: row;
+    align-items:stretch;
+    justify-content: flex-start;
+    flex:1;
+
+
+    font-family: 'Secular One', sans-serif;
+    border-radius: 25px;
+    border: 1px solid black;
+    
+    }
+
+.balance{
+    font-size: 2.5vw;
+    font-weight: 800;
+    flex: 1;
+    padding: 1% 4% 1% 4%;
+}
+
+.balanceamount{
+    font-size: 2.5vw;
+    padding: 1% 4% 1% 4%;
+}
+
+.funddevelopment{
+    color: darkgreen;
+    text-align: left;
+    font-size: 1.5vw;
+}
+
+.transactionContainer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+    font-family: 'Secular One', sans-serif;
+    border-radius: 25px;
+    border: 1px solid black;
+    
+    }
+
+    .transactionContainerHeading{
+        font-size: 2.5vw;
+        font-weight: 800;
+        flex: 1;
+        padding: 1% 4% 1% 4%;
+
+    }
+
+    .transactions{
+        font-size: 1.5vw;
+        display: flex;
+        flex-direction: row;
+        align-items:stretch;
+        justify-content: flex-start;
+        padding: 1% 4% 1% 4%;
+        flex:1;
+    }
+
+    .transdate{
+        flex:1;
+    }
+    .transseller{
+        flex:1;
+    }
+    .transamount{
+        flex:1;
     }

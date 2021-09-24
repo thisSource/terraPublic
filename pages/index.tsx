@@ -5,6 +5,7 @@ import { ListTransactionsResponse } from "../lib/tink/transactions";
 import withSession, { ServerSideHandler } from "../lib/withSession";
 import styles from "../styles/Home.module.css";
 
+
 function getTinkLinkUrl() {
   if (!config.tink.clientId) throw new Error("tink client id must be set");
   const base = new URL(
@@ -79,3 +80,4 @@ export default function Home(props: { token?: string }) {
     </div>
   );
 }
+
