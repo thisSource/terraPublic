@@ -74,7 +74,7 @@ export default function Home(props: { token?: string }) {
           <a className={styles.button} href={getTinkLinkUrl()}>
             Connect account
           </a>
-          <div className={styles.firstPageImage}><Image  src="/montain.jpg" width={1000} height={500}/></div>
+          <div className={styles.firstPageImage}><Image  src="/yellow.jpg" width={1000} height={500}/></div>
 
         </main>
       ) : (

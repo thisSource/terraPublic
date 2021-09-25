@@ -1,6 +1,6 @@
 import MainContainer from "../components/myAccountContainerComps/MainContainer"
 
-function myAccount(){
+function MyAccount(){
     return (
         <div>
             <MainContainer/>
@@ -8,4 +8,4 @@ function myAccount(){
     )
 }
 
-export default myAccount
+export default MyAccount
