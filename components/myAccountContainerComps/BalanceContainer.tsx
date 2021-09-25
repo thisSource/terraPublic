@@ -1,4 +1,5 @@
-import styles from "../../styles/Main.module.css";
+import styles from "../../styles/MyAccount.module.css";
+
 
 function BalanceContainer(){
     return (

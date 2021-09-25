@@ -1,0 +1,83 @@
+import styles from "../../styles/FundAndCampaign.module.css";
+import Image from "next/image";
+
+function FundContainer() {
+  let imageWidth = 800;
+  let imageHeight = 400;
+  let campaignPlaceholder = [
+    {
+      company: "Neste",
+      offer: "Sustainable Aviation Fuel",
+      image: (
+        <Image
+          src="/fundImages/neste.jpg"
+          width={imageWidth}
+          height={imageHeight}
+        />
+      ),
+      campaingSlogan:
+        "Neste Oyj is an oil refining and marketing company located in Espoo, Finland. It produces, refines and markets oil products, provides engineering services, and licenses production technologies. Neste has operations in 14 countries. Neste shares are listed on the NASDAQ OMX Helsinki Stock Exchange."
+    },
+    {
+      company: "Sunpower Corp",
+      offer: "Solar energy",
+      image: (
+        <Image
+          src="/fundImages/sunpower.jpg"
+          width={imageWidth}
+          height={imageHeight}
+        />
+      ),
+      campaingSlogan:
+        "SunPower Corporation is an American company specializing in solar power generation and energy storage."
+    },
+    {
+      company: "SeaTwirl",
+      offer: "Wind energy",
+      image: (
+        <Image
+          src="/fundImages/seatwirl.jpg"
+          width={imageWidth}
+          height={imageHeight}
+        />
+      ),
+      campaingSlogan:
+        "SeaTwirl is developing a floating wind turbine for the ocean. SeaTwirl's wind turbine is easier to build, install and maintain than traditional offshore wind."
+    },
+    {
+      company: "FirstSolar",
+      offer: "Solar energy",
+      image: (
+        <Image
+          src="/fundImages/firstsolar.jpg"
+          width={imageWidth}
+          height={imageHeight}
+        />
+      ),
+      campaingSlogan:
+        "First Solar, Inc. is an American manufacturer of solar panels, and a provider of utility-scale PV power plants and supporting services that include finance, construction, maintenance and end-of-life panel recycling."
+    }
+  ];
+
+  return (
+    <div className={styles.campaignContainer}>
+      <div>
+        <div className={styles.campaignContainerHeading}>Our Fund</div>
+        {/* <div><Image src="/fundImages/funddev.png" width={410} height={220} /></div> */}
+
+        {campaignPlaceholder.map((camp) => {
+          return (
+            <div className={styles.campaigns}>
+              <div className={styles.campaigncompany}>{camp.company}</div>
+              <div className={styles.campaignimage}>{camp.image}</div>
+              <div className={styles.campaignoffer}>{camp.offer}</div>
+              <div className={styles.campaignslogan}>{camp.campaingSlogan}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default FundContainer;

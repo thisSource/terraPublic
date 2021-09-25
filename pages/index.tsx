@@ -4,6 +4,7 @@ import config from "../config";
 import { ListTransactionsResponse } from "../lib/tink/transactions";
 import withSession, { ServerSideHandler } from "../lib/withSession";
 import styles from "../styles/Home.module.css";
+import Image from "next/image";
 
 
 function getTinkLinkUrl() {
@@ -60,23 +61,28 @@ export default function Home(props: { token?: string }) {
 
   return (
     <div className={styles.container}>
+
       <Head>
-        <title>Alle</title>
+        <title>SUMBYTE</title>
         <meta name="description" content="Next unicorn app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
 
       {!token ? (
         <main className={styles.main}>
           <a className={styles.button} href={getTinkLinkUrl()}>
             Connect account
           </a>
+          <div className={styles.firstPageImage}><Image  src="/montain.jpg" width={1000} height={500}/></div>
+
         </main>
       ) : (
         <pre>{JSON.stringify(transactions?.transactions, null, 2)}</pre>
       )}
 
       {error ? <div className={styles.errorBox}>{error}</div> : null}
+
     </div>
   );
 }
