@@ -1,16 +1,19 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import React from "react";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 
-import Navbar from '../components/Navbar'
-import MainContainer from '../components/myAccountContainerComps/MainContainer'
-import MyAccount from './myaccount'
+import Navbar from "../components/Navbar";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [queryClient] = React.useState(() => new QueryClient());
   return (
-    <div>
-      <Navbar/>
-      <Component {...pageProps} />
-    </div>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Navbar />
+        <Component {...pageProps} />
+      </Hydrate>
+    </QueryClientProvider>
+  );
 }
-export default MyApp
+export default MyApp;
