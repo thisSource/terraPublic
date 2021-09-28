@@ -1,10 +1,10 @@
 import Head from "next/head";
 import config from "../config";
 import { useAccounts } from "../lib/hooks/useAccounts";
-import { useTransactions } from "../lib/hooks/useTransactions";
 import { ListAccountsResponse } from "../lib/tink/accounts";
 import withSession, { ServerSideHandler } from "../lib/withSession";
 import styles from "../styles/Home.module.css";
+import Image from "next/image";
 
 function getTinkLinkUrl() {
   if (!config.tink.clientId) throw new Error("tink client id must be set");
@@ -51,12 +51,15 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Alle</title>
+        <title>SUMBYTE</title>
         <meta name="description" content="Next unicorn app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
+        <div className={styles.firstPageImage}>
+          <Image src="/yellow.jpg" width={1000} height={500} />
+        </div>
         {isLoading ? "laddar konton" : null}
         {!data ? (
           <a className={styles.button} href={getTinkLinkUrl()}>

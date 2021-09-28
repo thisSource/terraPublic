@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+
+.mainContainer {
+  margin: 5% 15% 1% 15%;
+}
+
+
+.balanceContainer {
+  display: flex;
+  margin-bottom: 5%;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex: 1;
+
+  /* font-family: "Secular One", sans-serif; */
+  border-radius: 10px;
+  border-top: 1px solid gray;
+}
+
+.balance {
+  font-size: 2vw;
+  font-weight: 800;
+  flex: 1;
+  padding: 1% 4% 1% 4%;
+}
+
+.balanceamount {
+  font-size: 2vw;
+  padding: 1% 4% 1% 4%;
+}
+
+.funddevelopment {
+  color: darkgreen;
+  text-align: left;
+  font-size: 1.5vw;
+}
+
+.transactionContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+  /* font-family: "Secular One", sans-serif; */
+  border-radius: 10px;
+  border-top: 1px solid gray;
+}
+
+.transactionContainerHeading {
+  font-size: 2vw;
+  font-weight: 800;
+  flex: 1;
+  padding: 1% 4% 1% 4%;
+}
+
+.transactions {
+  font-size: 1.3vw;
+  display: flex;
+  padding: 1% 4% 1% 4%;
+}
+.transheaders{
+  font-size: 1.3vw;
+  font-weight: 800;
+  display: flex;
+  padding: 1% 4% 1% 4%;
+}
+
+.transdatehead {
+  flex: 1;
+}
+.transsellerhead {
+  flex: 1;
+  text-align: center;
+}
+.transamounthead {
+  flex: 1;
+  text-align: right;
+}
+.transinvesthead {
+  flex: 1;
+  text-align: right;
+}
+.transreductionhead{
+  flex: 1;
+  text-align: right;
+}
+
+
+.transdate {
+  flex: 1;
+}
+.transseller {
+  flex: 1;
+  text-align: center;
+}
+.transamount {
+  flex: 1;
+  text-align: right;
+}
+.transinvest {
+  flex: 1;
+  text-align: right;
+}
+.transreduction{
+  color: green;
+  flex: 1;
+  text-align: right;
+}
+
+.redeembutton{
+  margin: 3%;   
+  padding: 1%;
+  font-size: 1.2vw;
+  background-color: lightgray;
+ border: 1px solid gray;
+ border-radius: 10px;
+}
+
+.campaignContainer {
+  margin: 5% 10% 1% 35%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5%;
+  /* font-family: "Secular One", sans-serif; */
+  padding: 1% 4% 1% 4%;
+}
+
+.campaignContainerHeading {
+  font-size: 2.5vw;
+  font-weight: 800;
+}
+
+.campaigns {
+  flex: 1;
+  padding-top: 4%;
+}
+.campaignimage {
+  flex: 1;
+  padding-top: 5%;
+}
+
+.campaigncompany {
+  position: absolute;
+  padding: 3% 1% 1% 2%;
+  z-index: 1;
+  font-size: 3vw;
+  color: white;
+  text-shadow: 2px 2px gray;
+}
+
+.campaignslogan {
+  margin-right: 20%;
+  font-size: 1.2vw;
+  padding-top: 2%;
+}
+
+
