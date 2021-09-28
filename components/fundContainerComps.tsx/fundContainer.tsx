@@ -1,9 +1,12 @@
 import styles from "../../styles/FundAndCampaign.module.css";
 import Image from "next/image";
+import LineGraph from './line'
+
+
 
 function FundContainer() {
   let imageWidth = 800;
-  let imageHeight = 400;
+  let imageHeight = 500;
   let campaignPlaceholder = [
     {
       company: "Neste",
@@ -63,15 +66,16 @@ function FundContainer() {
     <div className={styles.campaignContainer}>
       <div>
         <div className={styles.campaignContainerHeading}>Our Fund</div>
-        {/* <div><Image src="/fundImages/funddev.png" width={410} height={220} /></div> */}
+        <div className={styles.funddev}><LineGraph/></div>
+        <div className={styles.portfolioheading}>Portfolio</div>
 
         {campaignPlaceholder.map((camp) => {
           return (
-            <div className={styles.campaigns}>
-              <div className={styles.campaigncompany}>{camp.company}</div>
-              <div className={styles.campaignimage}>{camp.image}</div>
-              <div className={styles.campaignoffer}>{camp.offer}</div>
-              <div className={styles.campaignslogan}>{camp.campaingSlogan}</div>
+            <div className={styles.portfolio}>
+              <div className={styles.fundcompany}>{camp.company}</div>
+              <div className={styles.fundimage}>{camp.image}</div>
+              <div className={styles.fundoffer}>{camp.offer}</div>
+              <div className={styles.fundslogan}>{camp.campaingSlogan}</div>
             </div>
           );
         })}

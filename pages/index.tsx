@@ -59,6 +59,8 @@ export default function Home(props: { token?: string }) {
     }
   }, [token]);
 
+  console.log(transactions)
+
   return (
     <div className={styles.container}>
 

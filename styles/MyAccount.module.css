@@ -57,6 +57,33 @@
   display: flex;
   padding: 1% 4% 1% 4%;
 }
+.transheaders{
+  font-size: 1.3vw;
+  font-weight: 800;
+  display: flex;
+  padding: 1% 4% 1% 4%;
+}
+
+.transdatehead {
+  flex: 1;
+}
+.transsellerhead {
+  flex: 1;
+  text-align: center;
+}
+.transamounthead {
+  flex: 1;
+  text-align: right;
+}
+.transinvesthead {
+  flex: 1;
+  text-align: right;
+}
+.transreductionhead{
+  flex: 1;
+  text-align: right;
+}
+
 
 .transdate {
   flex: 1;
@@ -70,6 +97,11 @@
   text-align: right;
 }
 .transinvest {
+  flex: 1;
+  text-align: right;
+}
+.transreduction{
+  color: green;
   flex: 1;
   text-align: right;
 }

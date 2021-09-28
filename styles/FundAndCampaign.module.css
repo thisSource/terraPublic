@@ -37,12 +37,55 @@
   border-bottom: 1px gray solid;
 }
 
+.redeembutton {
+  margin: 3%;
+  padding: 1%;
+  font-size: 1.2vw;
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+.funddev {
+  flex: 1;
+  margin-right: 15%;
+}
 
-.redeembutton{
-     margin: 3%;   
-     padding: 1%;
-     font-size: 1.2vw;
-     background-color: lightgray;
-    border: 1px solid gray;
-    border-radius: 10px;
+.portfolioheading {
+  margin-top: 5%;
+  font-size: 2.5vw;
+  font-weight: 800;
+  padding-bottom: 3px;
+  border-bottom: 1px gray solid;
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: row;
+  padding-top: 4%;
+}
+
+.fundimage {
+  flex: 1;
+}
+
+.fundcompany {
+  /* position: absolute; */
+  flex: 1;
+  font-size: 2.2vw;
+  padding-right: 2%;
+}
+.fundoffer {
+  flex: 1;
+  font-size: 1.2vw;
+  font-weight: 800;
+  padding-bottom: 2%;
+  padding-left: 2%;
+  border-bottom: 1px gray solid;
+}
+
+.fundslogan {
+  flex: 1;
+  font-size: 1.2vw;
+  padding-bottom: 2%;
+  border-bottom: 1px gray solid;
 }
