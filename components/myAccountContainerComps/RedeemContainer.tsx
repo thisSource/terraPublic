@@ -1,14 +1,12 @@
-import styles from "../../styles/MyAccount.module.css";
-
-function RedeemContainer(){
-    return (
-        <div className={styles.balanceContainer}>
-            <div className={styles.balance}>Redeem funds</div>
-            <div className={styles.redeembutton}>Next step</div>
-            {/* <div className={styles.funddevelopment}> + 4,5 %</div> */}
-            
-        </div>
-    )
+function RedeemContainer() {
+  return (
+    <div>
+      <div>Redeem funds</div>
+      <div>Next step</div>
+      {/* <div > + 4,5 %</div> */}
+    </div>
+  );
 }
 
-export default RedeemContainer
+export default RedeemContainer;
+

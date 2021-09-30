@@ -1,16 +1,14 @@
-import styles from "../../styles/MyAccount.module.css";
-
-
-function BalanceContainer(){
-    return (
-        <div className={styles.balanceContainer}>
-            <div className={styles.balance}>My savings</div>
-            <div className={styles.balanceamount}>SEK 84 153.34
-            <div className={styles.funddevelopment}> + 4,5 %</div>
-            </div>
-            
-        </div>
-    )
+function BalanceContainer() {
+  return (
+    <div>
+      <div>My savings</div>
+      <div>
+        SEK 84 153.34
+        <div> + 4,5 %</div>
+      </div>
+    </div>
+  );
 }
 
-export default BalanceContainer
+export default BalanceContainer;
+

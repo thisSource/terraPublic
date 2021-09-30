@@ -1,4 +1,3 @@
-import styles from "../../styles/FundAndCampaign.module.css";
 import Image from "next/image";
 import image from "next/image";
 
@@ -18,7 +17,7 @@ function CampaignContainer() {
         />
       ),
       campaingSlogan:
-        "Everytime you shop at Coop we will co-invest togeterh with you 1 %. We belive this will help transform the world."
+        "Everytime you shop at Coop we will co-invest togeterh with you 1 %. We belive this will help transform the world.",
     },
     {
       company: "EON",
@@ -30,7 +29,7 @@ function CampaignContainer() {
           height={imageHeight}
         />
       ),
-      campaingSlogan: "Wind, Solor, Hydro, the future is sutainable"
+      campaingSlogan: "Wind, Solor, Hydro, the future is sutainable",
     },
     {
       company: "Clas Ohlson",
@@ -42,7 +41,7 @@ function CampaignContainer() {
           height={imageHeight}
         />
       ),
-      campaingSlogan: "Save the world"
+      campaingSlogan: "Save the world",
     },
     {
       company: "Akademibokhandeln",
@@ -54,21 +53,21 @@ function CampaignContainer() {
           height={imageHeight}
         />
       ),
-      campaingSlogan: "Read more"
-    }
+      campaingSlogan: "Read more",
+    },
   ];
 
   return (
-    <div className={styles.campaignContainer}>
+    <div>
       <div>
-        <div className={styles.campaignContainerHeading}>Campaigns</div>
+        <div>Campaigns</div>
         {campaignPlaceholder.map((camp) => {
           return (
-            <div className={styles.campaigns}>
-              <div className={styles.campaigncompany}>{camp.company}</div>
-              <div className={styles.campaignimage}>{camp.image}</div>
-              <div className={styles.campaignoffer}>{camp.offer}</div>
-              <div className={styles.campaignslogan}>{camp.campaingSlogan}</div>
+            <div>
+              <div>{camp.company}</div>
+              <div>{camp.image}</div>
+              <div>{camp.offer}</div>
+              <div>{camp.campaingSlogan}</div>
             </div>
           );
         })}
