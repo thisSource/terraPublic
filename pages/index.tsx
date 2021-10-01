@@ -1,5 +1,6 @@
 import Head from "next/head";
 import config from "../config";
+import yellowImg from "../public/yellow.jpg";
 import { useAccounts } from "../lib/hooks/useAccounts";
 import { ListAccountsResponse } from "../lib/tink/accounts";
 import withSession, { ServerSideHandler } from "../lib/withSession";
@@ -57,7 +58,7 @@ function Home() {
 
       <main className="container mx-auto">
         <div>
-          <Image src="/yellow.jpg" width={1000} height={500} />
+          <Image src={yellowImg} />
         </div>
         {isLoading ? "laddar konton" : null}
         {!data ? (
