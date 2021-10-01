@@ -1,8 +1,5 @@
-import styles from "../../styles/FundAndCampaign.module.css";
 import Image from "next/image";
-import LineGraph from './line'
-
-
+import LineGraph from "./line";
 
 function FundContainer() {
   let imageWidth = 800;
@@ -19,7 +16,7 @@ function FundContainer() {
         />
       ),
       campaingSlogan:
-        "Neste Oyj is an oil refining and marketing company located in Espoo, Finland. It produces, refines and markets oil products, provides engineering services, and licenses production technologies. Neste has operations in 14 countries. Neste shares are listed on the NASDAQ OMX Helsinki Stock Exchange."
+        "Neste Oyj is an oil refining and marketing company located in Espoo, Finland. It produces, refines and markets oil products, provides engineering services, and licenses production technologies. Neste has operations in 14 countries. Neste shares are listed on the NASDAQ OMX Helsinki Stock Exchange.",
     },
     {
       company: "Sunpower Corp",
@@ -32,7 +29,7 @@ function FundContainer() {
         />
       ),
       campaingSlogan:
-        "SunPower Corporation is an American company specializing in solar power generation and energy storage."
+        "SunPower Corporation is an American company specializing in solar power generation and energy storage.",
     },
     {
       company: "SeaTwirl",
@@ -45,7 +42,7 @@ function FundContainer() {
         />
       ),
       campaingSlogan:
-        "SeaTwirl is developing a floating wind turbine for the ocean. SeaTwirl's wind turbine is easier to build, install and maintain than traditional offshore wind."
+        "SeaTwirl is developing a floating wind turbine for the ocean. SeaTwirl's wind turbine is easier to build, install and maintain than traditional offshore wind.",
     },
     {
       company: "FirstSolar",
@@ -58,24 +55,26 @@ function FundContainer() {
         />
       ),
       campaingSlogan:
-        "First Solar, Inc. is an American manufacturer of solar panels, and a provider of utility-scale PV power plants and supporting services that include finance, construction, maintenance and end-of-life panel recycling."
-    }
+        "First Solar, Inc. is an American manufacturer of solar panels, and a provider of utility-scale PV power plants and supporting services that include finance, construction, maintenance and end-of-life panel recycling.",
+    },
   ];
 
   return (
-    <div className={styles.campaignContainer}>
+    <div>
       <div>
-        <div className={styles.campaignContainerHeading}>Our Fund</div>
-        <div className={styles.funddev}><LineGraph/></div>
-        <div className={styles.portfolioheading}>Portfolio</div>
+        <div>Our Fund</div>
+        <div>
+          <LineGraph />
+        </div>
+        <div>Portfolio</div>
 
         {campaignPlaceholder.map((camp) => {
           return (
-            <div className={styles.portfolio}>
-              <div className={styles.fundcompany}>{camp.company}</div>
-              <div className={styles.fundimage}>{camp.image}</div>
-              <div className={styles.fundoffer}>{camp.offer}</div>
-              <div className={styles.fundslogan}>{camp.campaingSlogan}</div>
+            <div>
+              <div>{camp.company}</div>
+              <div>{camp.image}</div>
+              <div>{camp.offer}</div>
+              <div>{camp.campaingSlogan}</div>
             </div>
           );
         })}
