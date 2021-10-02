@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 
-const classes = (...classNames) => classNames.filter(Boolean).join(" ");
+const classes = (...classNames: any[]) => classNames.filter(Boolean).join(" ");
+
 
 const navigations = [
   {
