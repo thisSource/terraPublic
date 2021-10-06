@@ -16,7 +16,7 @@ function CampaignContainer() {
         />
       ),
       campaingSlogan:
-        "Everytime you shop at Coop we will co-invest togeterh with you 1 %. We belive this will help transform the world.",
+        "Everytime you shop at Coop we will co-invest togeterh with you 1 %. We belive this will help transform the world."
     },
     {
       company: "EON",
@@ -28,7 +28,7 @@ function CampaignContainer() {
           height={imageHeight}
         />
       ),
-      campaingSlogan: "Wind, Solor, Hydro, the future is sutainable",
+      campaingSlogan: "Wind, Solor, Hydro, the future is sutainable"
     },
     {
       company: "Clas Ohlson",
@@ -40,7 +40,7 @@ function CampaignContainer() {
           height={imageHeight}
         />
       ),
-      campaingSlogan: "Save the world",
+      campaingSlogan: "Save the world"
     },
     {
       company: "Akademibokhandeln",
@@ -52,8 +52,8 @@ function CampaignContainer() {
           height={imageHeight}
         />
       ),
-      campaingSlogan: "Read more",
-    },
+      campaingSlogan: "Read more"
+    }
   ];
 
   return (

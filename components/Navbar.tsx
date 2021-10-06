@@ -12,7 +12,7 @@ const navigations = [
   },
   {
     name: "Fund",
-    href: "/fund",
+    href: "/fund", 
   },
   {
     name: "Campaign",
