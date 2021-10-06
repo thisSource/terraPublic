@@ -1,5 +1,4 @@
 import Image from "next/image";
-import image from "next/image";
 
 function CampaignContainer() {
   let imageWidth = 800;
@@ -63,7 +62,7 @@ function CampaignContainer() {
         <div>Campaigns</div>
         {campaignPlaceholder.map((camp) => {
           return (
-            <div>
+            <div key={`${camp.company}${camp.offer}`}>
               <div>{camp.company}</div>
               <div>{camp.image}</div>
               <div>{camp.offer}</div>

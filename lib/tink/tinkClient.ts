@@ -9,6 +9,10 @@ interface RequestOptions extends Omit<RequestInit, "body"> {
   body: Record<any, any> | typeof URLSearchParams | ReadableStream;
 }
 
+interface Options extends Pick<RequestOptions, "headers"> {
+  body: RequestOptions["body"] | Record<any, any>;
+}
+
 export class HttpError extends Error {
   code: number;
   constructor(code: number, statusText: string) {
@@ -55,7 +59,7 @@ export default class TinkClient {
     return await this.makeRequest(request);
   }
 
-  async post(path: string, options?: Pick<RequestInit, "headers" | "body">) {
+  async post(path: string, options?: Options) {
     const request = new Request(new URL(path, this.baseUrl).toString(), {
       method: "POST",
       body: transformRequestData(options?.body),

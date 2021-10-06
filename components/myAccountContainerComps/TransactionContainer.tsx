@@ -87,7 +87,7 @@ function TransactionContainer() {
       <div>
         {transactionPlaceholder.map((trans) => {
           return (
-            <div>
+            <div key={trans.date}>
               <div>{trans.date}</div>
               <div>{trans.seller}</div>
               <div>{trans.amount}</div>

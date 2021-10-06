@@ -70,7 +70,7 @@ function FundContainer() {
 
         {campaignPlaceholder.map((camp) => {
           return (
-            <div>
+            <div key={`${camp.company}${camp.offer}`}>
               <div>{camp.company}</div>
               <div>{camp.image}</div>
               <div>{camp.offer}</div>

@@ -11,4 +11,3 @@ function BalanceContainer() {
 }
 
 export default BalanceContainer;
-

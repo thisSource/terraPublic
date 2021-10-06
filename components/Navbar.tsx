@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const classes = (...classNames: any[]) => classNames.filter(Boolean).join(" ");
 
-
 const navigations = [
   {
     name: "My account",
@@ -46,8 +45,8 @@ function Navbar() {
           )}
         >
           {navigations.map((item) => (
-            <Link href={item.href}>
-              <a className={item.classes ?? ""}>{item.name}</a>
+            <Link key={item.href} href={item.href}>
+              <a className={classes(item.classes)}>{item.name}</a>
             </Link>
           ))}
         </div>
@@ -69,7 +68,7 @@ function Navbar() {
           )}
         >
           {navigations.map((item) => (
-            <Link href={item.href}>
+            <Link key={item.href} href={item.href} passHref>
               <span className="block">
                 <a className={classes(item.classes)}>{item.name}</a>
               </span>

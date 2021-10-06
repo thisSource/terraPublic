@@ -54,6 +54,6 @@ export interface Transaction {
 }
 
 export interface ListTransactionsResponse {
-  transactions: Transaction;
+  transactions: Transaction[];
   nextPagetoken: string;
 }
