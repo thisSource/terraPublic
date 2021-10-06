@@ -5,6 +5,7 @@ import { useAccounts } from "../lib/hooks/useAccounts";
 import { ListAccountsResponse } from "../lib/tink/accounts";
 import withSession, { ServerSideHandler } from "../lib/withSession";
 import Image from "next/image";
+import { UserAuthTokens } from "./callback";
 
 function getTinkLinkUrl() {
   if (!config.tink.clientId) throw new Error("tink client id must be set");
@@ -22,9 +23,9 @@ function getTinkLinkUrl() {
 }
 
 const handler: ServerSideHandler = async ({ req }) => {
-  const token = req.session.get<String>("token");
+  const tokens = req.session.get<UserAuthTokens>("auth");
   return {
-    props: { token },
+    props: { tokens: tokens ?? null },
   };
 };
 

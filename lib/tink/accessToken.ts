@@ -74,3 +74,7 @@ export default async function fetchAccessToken(
   });
   return response;
 }
+
+export async function refreshToken(refresh_token: string) {
+  return fetchAccessToken(refresh_token, "refreshToken");
+}

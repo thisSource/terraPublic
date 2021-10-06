@@ -1,4 +1,4 @@
-import fetchAccessToken from "../../../lib/tink/accessToken";
+import fetchAccessToken, { refreshToken } from "../../../lib/tink/accessToken";
 import { stubRequest } from "../../../mocks/server";
 jest.mock("../../../config", () => ({
   __esModule: true,
@@ -32,7 +32,9 @@ describe("tink/accessToken", () => {
     expect(request).toHaveBeenCalled();
     expect(token).toEqual({ accessToken: "my_access_token" });
   });
+});
 
+describe("tink/refreshToken", () => {
   it("refreshes token", async () => {
     const request = stubRequest(
       "post",
@@ -49,7 +51,7 @@ describe("tink/accessToken", () => {
       })
       .use();
 
-    const token = await fetchAccessToken("123", "refreshToken");
+    const token = await refreshToken("123");
     expect(request).toHaveBeenCalled();
     expect(token).toEqual({
       access_token: "my_access_token",
