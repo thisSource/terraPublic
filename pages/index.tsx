@@ -24,6 +24,15 @@ function getTinkLinkUrl() {
 
 const handler: ServerSideHandler = async ({ req }) => {
   const tokens = req.session.get<UserAuthTokens>("auth");
+
+  if (tokens) {
+    return {
+      redirect: {
+        destination: "/myaccount",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: { tokens: tokens ?? null },
   };
@@ -59,7 +68,7 @@ function Home() {
 
       <main className="container mx-auto">
         <div>
-          <Image src={yellowImg} />
+          <Image src={yellowImg} layout="responsive" />
         </div>
         {isLoading ? "laddar konton" : null}
         {!data ? (

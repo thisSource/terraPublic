@@ -1,14 +1,15 @@
+import { Fragment } from "react";
 import BalanceContainer from "./BalanceContainer";
 import RedeemContainer from "./RedeemContainer";
 import TransactionContainer from "./TransactionContainer";
 
 function MainContainer() {
   return (
-    <div>
+    <Fragment>
       <BalanceContainer />
       <TransactionContainer />
       <RedeemContainer />
-    </div>
+    </Fragment>
   );
 }
 
