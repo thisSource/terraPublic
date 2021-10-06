@@ -6,7 +6,6 @@ function Fund() {
   return (
     <div>
       <ContainerDevelopmentCard />
-
       <div className="grid lg:grid-cols-3 gap-10 lg:ml-20 lg:mr-20 mt-10">
         {portfolio.map((company) => (
           <CompanyCard
