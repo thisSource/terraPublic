@@ -12,21 +12,19 @@ function MyAccount() {
       <BalanceContainer />
       <TransactionContainer
         transactions={
-          data
-            ? data.transactions.map((t) => ({
-                id: t.id,
-                amount:
-                  parseInt(t.amount.value.unscaledValue) /
-                  Math.pow(10, parseInt(t.amount.value.scale)),
-                seller: t.descriptions.display,
-                date: t.dates.booked,
-                investment:
-                  (parseInt(t.amount.value.unscaledValue) /
-                    Math.pow(10, parseInt(t.amount.value.scale))) *
-                  0.01,
-                CO2: 2,
-              }))
-            : []
+          data?.transactions?.map((t) => ({
+            id: t.id,
+            amount:
+              parseInt(t.amount.value.unscaledValue) /
+              Math.pow(10, parseInt(t.amount.value.scale)),
+            seller: t.descriptions.display,
+            date: t.dates.booked,
+            investment:
+              (parseInt(t.amount.value.unscaledValue) /
+                Math.pow(10, parseInt(t.amount.value.scale))) *
+              0.01,
+            CO2: 2,
+          })) ?? []
         }
         loading={isLoading}
       />
