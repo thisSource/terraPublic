@@ -1,6 +1,6 @@
 function ContainerDevelopmentCard() {
   return (
-    <div className=" grid lg:grid-cols-2 gap-10 lg:ml-20 lg:mr-20">
+    <div className="grid lg:grid-cols-2 gap-10 lg:ml-20 lg:mr-20">
       <div className="bg-gray-100 rounded overflow-hidden shadow-lg p-10">
         <div className="text-md text-black text-center pt-1 mb-1">
           Development 12 month

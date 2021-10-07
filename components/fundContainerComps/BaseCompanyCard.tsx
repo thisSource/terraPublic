@@ -1,26 +1,26 @@
 import Image from "next/image";
 
-interface AppProps {
-  companyName: string;
-  companyOffer: string;
-  companyAbout: string;
-  companyImage: string;
+interface Props {
+  name: string;
+  offer: string;
+  about: string;
+  image: string;
 }
 
-function CompanyCard(company: AppProps) {
+function CompanyCard(company: Props) {
   return (
     <div className="bg-gray-100 rounded overflow-hidden shadow-lg">
       <Image
-        src={company.companyImage}
+        src={company.image}
         width="1000"
         height="600"
         alt="company image"
         className="w-full"
       />
       <div className="m-6">
-        <div className="font-bold">{company.companyName}</div>
-        <div className="text-sm">{company.companyOffer}</div>
-        <div className="text-xs pt-3">{company.companyAbout}</div>
+        <p className="font-bold">{company.name}</p>
+        <p className="text-sm">{company.offer}</p>
+        <p className="text-xs pt-3">{company.about}</p>
       </div>
     </div>
   );
