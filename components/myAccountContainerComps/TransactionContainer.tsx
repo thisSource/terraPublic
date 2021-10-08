@@ -1,102 +1,101 @@
-function TransactionContainer() {
-  let transactionHeaders = {
-    date: "Date",
-    seller: "Seller",
-    amount: "Transaction",
-    investment: "To savings",
-    CO2: "CO2 reduct. KG",
-  };
+import dayjs from "dayjs";
 
-  let transactionPlaceholder = [
-    {
-      date: "2021-09-24",
-      seller: "Amazon",
-      amount: 1000,
-      investment: 1000 * 0.01,
-      CO2: 2.3,
-    },
-    {
-      date: "2021-09-23",
-      seller: "Nike",
-      amount: 200,
-      investment: 200 * 0.01,
-      CO2: 1.1,
-    },
-    {
-      date: "2021-09-22",
-      seller: "SJ",
-      amount: 500,
-      investment: 500 * 0.01,
-      CO2: 1.6,
-    },
-    {
-      date: "2021-09-21",
-      seller: "Coop",
-      amount: 300,
-      investment: 300 * 0.02,
-      CO2: 1.3,
-    },
-    {
-      date: "2021-09-20",
-      seller: "SL",
-      amount: 500,
-      investment: 500 * 0.01,
-      CO2: 1.6,
-    },
-    {
-      date: "2021-09-19",
-      seller: "Nike",
-      amount: 200,
-      investment: 200 * 0.01,
-      CO2: 1.1,
-    },
-    {
-      date: "2021-09-19",
-      seller: "Apple",
-      amount: 500,
-      investment: 500 * 0.01,
-      CO2: 1.6,
-    },
-    {
-      date: "2021-09-18",
-      seller: "Coop",
-      amount: 300,
-      investment: 300 * 0.02,
-      CO2: 1.3,
-    },
-    {
-      date: "2021-09-17",
-      seller: "LivsOchMat",
-      amount: 500,
-      investment: 500 * 0.01,
-      CO2: 1.6,
-    },
-  ];
+function formatDate(date: string) {
+  return dayjs(date).format("M MMM, YYYY");
+}
 
+function formatAmount(amount: number) {
+  return new Intl.NumberFormat("sv-SE", {
+    style: "currency",
+    currency: "SEK",
+    currencyDisplay: "narrowSymbol",
+  }).format(amount);
+}
+
+type Transaction = {
+  id: string;
+  date: string;
+  seller: string;
+  amount: number;
+  investment: number;
+  CO2: number;
+};
+
+type Props = {
+  transactions: Transaction[];
+  loading: boolean;
+};
+
+function Loading() {
   return (
-    <div>
-      <div>Transactions</div>
-      <div>
-        <div>{transactionHeaders.date}</div>
-        <div>{transactionHeaders.seller}</div>
-        <div>{transactionHeaders.amount}</div>
-        <div>{transactionHeaders.investment}</div>
-        <div>{transactionHeaders.CO2}</div>
+    <div className="rounded-md">
+      <div className="flex sm:max-w-xl w-full justify-between animate-pulse flex-row  h-full  space-x-5">
+        <div className="flex flex-col space-y-3">
+          <div className="w-36 bg-gray-300 h-6 rounded-md "></div>
+          <div className="w-24 bg-gray-300 h-6 rounded-md "></div>
+        </div>
+        <div className="flex flex-col space-y-3">
+          <div className="w-20 bg-gray-300 h-6 rounded-md "></div>
+          <div className="w-12 bg-gray-300 h-6 rounded-md self-end"></div>
+        </div>
       </div>
+    </div>
+  );
+}
 
-      <div>
-        {transactionPlaceholder.map((trans) => {
-          return (
-            <div key={trans.date}>
-              <div>{trans.date}</div>
-              <div>{trans.seller}</div>
-              <div>{trans.amount}</div>
-              <div>{trans.investment}</div>
-              <div>{trans.CO2}</div>
-            </div>
-          );
-        })}
+function EmptyState() {
+  return <p className="text-3xl">No transactions :/</p>;
+}
+
+function TransactionContainer(props: Props) {
+  if (props.transactions.length <= 0) {
+    return (
+      <div className="h-full my-44 flex justify-center">
+        <EmptyState />
       </div>
+    );
+  }
+  return (
+    <div className="py-3">
+      <h1 className="text-3xl font-bold font-display">Transactions</h1>
+
+      {props.loading ? (
+        <div className="flex flex-col space-y-6 mt-8">
+          <Loading />
+          <Loading />
+          <Loading />
+          <Loading />
+        </div>
+      ) : (
+        <div className="table w-full sm:max-w-xl">
+          {props.transactions.map((trans) => {
+            return (
+              <div key={trans.id} className="flex items-center bg-white py-2">
+                <div className="flex flex-col text-[#262626]">
+                  <span className="font-normal">
+                    {trans.seller}
+                    <span className="ml-2 text-[#52B390] text-xs">
+                      {trans.CO2}
+                    </span>
+                  </span>
+                  <time className="text-[#AEC0C6] text-sm">
+                    {formatDate(trans.date)}
+                  </time>
+                </div>
+
+                <div className="flex flex-col ml-auto">
+                  <span className="font-normal text-[#262626]">
+                    {formatAmount(trans.amount)}
+                  </span>
+                  <span className="text-[#52B390] text-sm">
+                    {formatAmount(trans.investment)}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
