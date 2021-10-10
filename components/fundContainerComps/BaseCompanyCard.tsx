@@ -16,6 +16,7 @@ function CompanyCard(company: Props) {
         height="600"
         alt="company image"
         className="w-full"
+        priority={true}
       />
       <div className="m-6">
         <p className="font-bold">{company.name}</p>
