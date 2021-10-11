@@ -70,7 +70,7 @@ function Campaign() {
   return (
     <div>
       <div>
-        <div className="grid lg:grid-cols-1 rounded gap-10 lg:ml-20 lg:mr-20 mt-8">
+        <div className="grid lg:grid-cols-1 rounded lg:ml-20 lg:mr-20 mt-8">
           <div className="bg-gray-100 overflow-hidden shadow-lg p-5">
             <div className="text-xs text-black text-left pt-1 mb-1">
               <span className="font-bold">Lorem ipsum dolor sit amet,</span>{" "}

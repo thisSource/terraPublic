@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useState } from "react";
 
 interface Props {
   name: string;
@@ -9,31 +8,21 @@ interface Props {
 }
 
 function CampaignCard(company: Props) {
-  useState;
-  let [isMouseOver, setIsMouseOver] = useState(false);
-  const visit = "Visit partner";
-
   return (
-    <div
-      className="bg-gray-100 overflow-hidden relative shadow-lg text-gray-700 hover:shadow-xl hover:-translate-y-2 hover:translate-x-1 transform transition"
-      onMouseEnter={() => setIsMouseOver(!isMouseOver)}
-      onMouseLeave={() => setIsMouseOver(!isMouseOver)}
-    >
+    <div className="group bg-gray-100 overflow-hidden relative shadow-lg text-gray-700 hover:shadow-xl hover:-translate-y-2 hover:translate-x-1 transform transition">
       <a href={company.link} target="_blank" rel="noreferrer">
         <div>
-          {isMouseOver && (
-            <p className="text-md italic text-black mt-10 ml-10 font-bold absolute z-10rounded">
-              {visit}
-            </p>
-          )}
+          <p className="text-md italic mt-10 ml-9 font-bold absolute z-10 text-transparent group-hover:text-gray-700">
+            "Visit partner"
+          </p>
+
           <span>
             <Image
               src={company.image}
               width="500"
               height="300"
               alt="company image"
-              className="w-full m-11 hover:opacity-30"
-              priority={true}
+              className="w-full m-11 group-hover:opacity-30"
             />
           </span>
         </div>
