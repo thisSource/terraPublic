@@ -14,7 +14,7 @@ const footerNav = [
     hrefB: "./fund",
     hrefC: "./myaccount",
     hrefD: "./fund",
-    hrefE: "./myaccount"
+    hrefE: "./myaccount",
   },
   {
     id: "2",
@@ -23,15 +23,15 @@ const footerNav = [
     linkB: "Dashboard",
     hrefT: "./fund",
     hrefA: "./myaccount",
-    hrefB: "./fund"
+    hrefB: "./fund",
   },
   {
     id: "3",
     title: "Contact",
     linkA: "Send us a message",
     hrefT: "./fund",
-    hrefA: "./myaccount"
-  }
+    hrefA: "./myaccount",
+  },
 ];
 
 function Footer() {
