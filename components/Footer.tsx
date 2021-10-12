@@ -14,7 +14,7 @@ const footerNav = [
     hrefB: "./fund",
     hrefC: "./myaccount",
     hrefD: "./fund",
-    hrefE: "./myaccount",
+    hrefE: "./myaccount"
   },
   {
     id: "2",
@@ -23,15 +23,15 @@ const footerNav = [
     linkB: "Dashboard",
     hrefT: "./fund",
     hrefA: "./myaccount",
-    hrefB: "./fund",
+    hrefB: "./fund"
   },
   {
     id: "3",
     title: "Contact",
     linkA: "Send us a message",
     hrefT: "./fund",
-    hrefA: "./myaccount",
-  },
+    hrefA: "./myaccount"
+  }
 ];
 
 function Footer() {
@@ -50,22 +50,32 @@ function Footer() {
         </Link>
         {footerNav.map((item) => (
           <div key={item.id}>
-            <div className={`p-0.5 font-semibold`}>{item.title}</div>
-            <Link href={`${item.hrefA}`}>
-              <div className={`${buttonStyle}`}>{item.linkA}</div>
-            </Link>
-            <Link href={`${item.hrefB}`}>
-              <div className={`${buttonStyle}`}>{item.linkB}</div>
-            </Link>
-            <Link href={`${item.hrefC}`}>
-              <div className={`${buttonStyle}`}>{item.linkC}</div>
-            </Link>
-            <Link href={`${item.hrefD}`}>
-              <div className={`${buttonStyle}`}>{item.linkD}</div>
-            </Link>
-            <Link href={`${item.hrefE}`}>
-              <div className={`${buttonStyle}`}>{item.linkE}</div>
-            </Link>
+            <a className={`p-0.5 font-semibold`}>{item.title}</a>
+            <div>
+              <Link href={`${item.hrefA}`}>
+                <a className={`${buttonStyle}`}>{item.linkA}</a>
+              </Link>
+            </div>
+            <div>
+              <Link href={`${item.hrefB}`}>
+                <a className={`${buttonStyle}`}>{item.linkB}</a>
+              </Link>
+            </div>
+            <div>
+              <Link href={`${item.hrefC}`}>
+                <a className={`${buttonStyle}`}>{item.linkC}</a>
+              </Link>
+            </div>
+            <div>
+              <Link href={`${item.hrefD}`}>
+                <a className={`${buttonStyle}`}>{item.linkD}</a>
+              </Link>
+            </div>
+            <div>
+              <Link href={`${item.hrefE}`}>
+                <a className={`${buttonStyle}`}>{item.linkE}</a>
+              </Link>
+            </div>
           </div>
         ))}
       </div>
