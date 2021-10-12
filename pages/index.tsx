@@ -68,7 +68,7 @@ function Home() {
 
       <main className="container mx-auto">
         <div>
-          <Image src={yellowImg} layout="responsive" />
+          <Image src={yellowImg} alt="cover photo" layout="responsive" />
         </div>
         {isLoading ? "laddar konton" : null}
         {!data ? (
