@@ -51,29 +51,29 @@ function Footer() {
         {footerNav.map((item) => (
           <div key={item.id}>
             <a className={`p-0.5 font-semibold`}>{item.title}</a>
-            <div>
+            <div className={`${buttonStyle}`}>
               <Link href={`${item.hrefA}`}>
-                <a className={`${buttonStyle}`}>{item.linkA}</a>
+                <a>{item.linkA}</a>
               </Link>
             </div>
-            <div>
+            <div className={`${buttonStyle}`}>
               <Link href={`${item.hrefB}`}>
-                <a className={`${buttonStyle}`}>{item.linkB}</a>
+                <a>{item.linkB}</a>
               </Link>
             </div>
-            <div>
+            <div className={`${buttonStyle}`}>
               <Link href={`${item.hrefC}`}>
-                <a className={`${buttonStyle}`}>{item.linkC}</a>
+                <a>{item.linkC}</a>
               </Link>
             </div>
-            <div>
+            <div className={`${buttonStyle}`}>
               <Link href={`${item.hrefD}`}>
-                <a className={`${buttonStyle}`}>{item.linkD}</a>
+                <a>{item.linkD}</a>
               </Link>
             </div>
-            <div>
+            <div className={`${buttonStyle}`}>
               <Link href={`${item.hrefE}`}>
-                <a className={`${buttonStyle}`}>{item.linkE}</a>
+                <a>{item.linkE}</a>
               </Link>
             </div>
           </div>
