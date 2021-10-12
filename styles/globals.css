@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Raleway&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 
-    background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
 }
 
 a {
@@ -20,6 +20,3 @@ a {
 img {
   /* border-radius: 5%; */
 }
-
-
-

@@ -8,21 +8,21 @@ const classes = (...classNames: any[]) => classNames.filter(Boolean).join(" ");
 const navigations = [
   {
     name: "My account",
-    href: "/myaccount"
+    href: "/myaccount",
   },
   {
     name: "Fund",
-    href: "/fund"
+    href: "/fund",
   },
   {
     name: "Campaign",
-    href: "/campaign"
+    href: "/campaign",
   },
   {
     name: "Get app",
     href: "/app",
-    classes: "px-4 py-2 text-white bg-black rounded-full"
-  }
+    classes: "px-4 py-2 text-white bg-black rounded-full",
+  },
 ];
 
 function Navbar() {

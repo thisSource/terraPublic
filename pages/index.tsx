@@ -17,7 +17,7 @@ function getTinkLinkUrl() {
     client_id: config.tink.clientId,
     redirect_uri: config.tink.redirectUri,
     market: "SE",
-    locale: "sv_SE"
+    locale: "sv_SE",
   });
   return `${base.toString()}?${params.toString()}`;
 }
@@ -29,12 +29,12 @@ const handler: ServerSideHandler = async ({ req }) => {
     return {
       redirect: {
         destination: "/myaccount",
-        permanent: false
-      }
+        permanent: false,
+      },
     };
   }
   return {
-    props: { tokens: tokens ?? null }
+    props: { tokens: tokens ?? null },
   };
 };
 

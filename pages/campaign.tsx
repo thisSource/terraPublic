@@ -6,64 +6,64 @@ const campaign = [
     company: "Razor",
     offer: "2% on all 2022 models",
     image: "/campaignImages/razorimg.jpg",
-    link: "https://www.razer.com/"
+    link: "https://www.razer.com/",
   },
   {
     id: "2",
     company: "IKEA",
     offer: "1% on all products online",
     image: "/campaignImages/ikeaimg.jpg",
-    link: "https://www.ikea.com"
+    link: "https://www.ikea.com",
   },
   {
     id: "3",
     company: "COOP",
     offer: "3 % on COOP inhouse soritment",
     image: "/campaignImages/coopimg.jpg",
-    link: "https://www.coop.se"
+    link: "https://www.coop.se",
   },
   {
     id: "4",
     company: "Ica",
     offer: "1% on all shopping for Ica members",
     image: "/campaignImages/icaimg.jpg",
-    link: "https://www.ica.se"
+    link: "https://www.ica.se",
   },
   {
     id: "5",
     company: "BP",
     offer: "1% on all bio-diesel all 2022",
     image: "/campaignImages/bpimg.jpg",
-    link: "https://bp.com"
+    link: "https://bp.com",
   },
   {
     id: "6",
     company: "Zara",
     offer: "1 % on all shopping",
     image: "/campaignImages/zaraimg.jpg",
-    link: "https://zara.com"
+    link: "https://zara.com",
   },
   {
     id: "7",
     company: "Inter Sport",
     offer: "3 % on all shopping online",
     image: "/campaignImages/intersportimg.jpg",
-    link: "https://intersport.com"
+    link: "https://intersport.com",
   },
   {
     id: "8",
     company: "Åhlens",
     offer: "1 % on all shopping 2022",
     image: "/campaignImages/ahlensimg.jpg",
-    link: "https://ahlens.se"
+    link: "https://ahlens.se",
   },
   {
     id: "9",
     company: "H&M",
     offer: "2 % on all shopping online",
     image: "/campaignImages/hmimg.jpg",
-    link: "https://hm.com"
-  }
+    link: "https://hm.com",
+  },
 ];
 
 function Campaign() {
