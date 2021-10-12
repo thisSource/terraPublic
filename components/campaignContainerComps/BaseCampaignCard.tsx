@@ -13,7 +13,7 @@ function CampaignCard(company: Props) {
       <a href={company.link} target="_blank" rel="noreferrer">
         <div>
           <p className="text-md italic mt-10 ml-9 font-bold absolute z-10 text-transparent group-hover:text-gray-700">
-            "Visit partner"
+            Visit partner
           </p>
 
           <span>
