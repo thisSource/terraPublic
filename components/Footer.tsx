@@ -1,36 +1,80 @@
 import Link from "next/link";
 
-const footerNav = [
+const titleStyle = "p-0.5 font-bold";
+const itemStyle = "p-0.5 hover:text-blue-700 hover:underline cursor-pointer";
+
+const about = [
   {
     id: "1",
-    title: "How it works",
-    linkA: "How it works step-by-step",
-    linkB: "Our Sustainable portfolio",
-    linkC: "Open account",
-    linkD: "About Sumbyte",
-    linkE: "Legal",
-    hrefT: "./fund",
-    hrefA: "./myaccount",
-    hrefB: "./fund",
-    hrefC: "./myaccount",
-    hrefD: "./fund",
-    hrefE: "./myaccount",
+    name: "How it works",
+    href: "/howitworks",
+    style: titleStyle,
   },
   {
     id: "2",
-    title: "Sumbyte for business",
-    linkA: "Get involved",
-    linkB: "Dashboard",
-    hrefT: "./fund",
-    hrefA: "./myaccount",
-    hrefB: "./fund",
+    name: "How it works step-by-step",
+    href: "/howitworks",
+    style: itemStyle,
   },
   {
     id: "3",
-    title: "Contact",
-    linkA: "Send us a message",
-    hrefT: "./fund",
-    hrefA: "./myaccount",
+    name: "Our Sustainable portfolio",
+    href: "/fund",
+    style: itemStyle,
+  },
+  {
+    id: "4",
+    name: "About Sumbyte.",
+    href: "/about",
+    style: itemStyle,
+  },
+  {
+    id: "5",
+    name: "Legal",
+    href: "/legal",
+    style: itemStyle,
+  },
+];
+
+const business = [
+  {
+    id: "1",
+    name: "Sumbyte for business",
+    href: "/business",
+    style: titleStyle,
+  },
+  {
+    id: "2",
+    name: "Get active",
+    href: "/business",
+    style: itemStyle,
+  },
+  {
+    id: "3",
+    name: "Dashboard",
+    href: "/bashboard",
+    style: itemStyle,
+  },
+];
+
+const contact = [
+  {
+    id: "1",
+    name: "Get in touch",
+    href: "/contact",
+    style: titleStyle,
+  },
+  {
+    id: "2",
+    name: "Write us a message",
+    href: "/contact",
+    style: itemStyle,
+  },
+  {
+    id: "3",
+    name: "F.A.Q",
+    href: "/faq",
+    style: itemStyle,
   },
 ];
 
@@ -38,49 +82,49 @@ function Footer() {
   const terms =
     "Consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrudexercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollitanim id est laborum. @sumbyte 2021";
 
-  const buttonStyle =
-    "p-0.5 hover:text-blue-700 hover:underline cursor-pointer";
   return (
-    <div className="border-t-2 mt-6">
+    <div className="border-t-2 mt-8">
       <div className="grid lg:grid-cols-4 md:grid-cols-2 lg:ml-20 md:ml-5 mt-3 mb-10 text-xs">
-        <Link href="/">
-          <a className="text-xl font-display font-bold text-[#3f3f3f]">
-            sumbyte.
-          </a>
-        </Link>
-        {footerNav.map((item) => (
-          <div key={item.id}>
-            <a className={`p-0.5 font-semibold`}>{item.title}</a>
-            <div className={`${buttonStyle}`}>
-              <Link href={`${item.hrefA}`}>
-                <a>{item.linkA}</a>
-              </Link>
-            </div>
-            <div className={`${buttonStyle}`}>
-              <Link href={`${item.hrefB}`}>
-                <a>{item.linkB}</a>
-              </Link>
-            </div>
-            <div className={`${buttonStyle}`}>
-              <Link href={`${item.hrefC}`}>
-                <a>{item.linkC}</a>
-              </Link>
-            </div>
-            <div className={`${buttonStyle}`}>
-              <Link href={`${item.hrefD}`}>
-                <a>{item.linkD}</a>
-              </Link>
-            </div>
-            <div className={`${buttonStyle}`}>
-              <Link href={`${item.hrefE}`}>
-                <a>{item.linkE}</a>
-              </Link>
-            </div>
-          </div>
-        ))}
+        <div className="text-xl font-display font-bold text-[#3f3f3f]">
+          sumbyte.
+        </div>
+        <div>
+          {about.map((item) => (
+            <Link key={item.id} href={item.href} passHref>
+              <div className="mt-1">
+                <a className={item.style}>{item.name}</a>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div>
+          {business.map((item) => (
+            <Link key={item.id} href={item.href} passHref>
+              <div className="mt-1">
+                <a className={item.style}>{item.name}</a>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div>
+          {contact.map((item) => (
+            <Link key={item.id} href={item.href} passHref>
+              <div className="mt-1">
+                <a className={item.style}>{item.name}</a>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
+      <Link href="./welcome" passHref>
+        <div className="lg:ml-20 mb-10">
+          <a className="p-2.5 px-3 rounded-full text-xs bg-black text-gray-100 font-semibold hover:bg-green-300 hover:text-gray-900 transition cursor-pointer">
+            join Sumbyte.
+          </a>
+        </div>
+      </Link>
       <div className="border-t-2">
-        <div className="text-xs ls:mx-20 ls:mx-1 mt-3 mb-10">{terms}</div>
+        <div className="text-xs lg:mx-20 md:mx-1 mt-3 mb-10">{terms}</div>
       </div>
     </div>
   );
