@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 
@@ -9,19 +8,26 @@ const navigations = [
   {
     name: "My account",
     href: "/myaccount",
+    classes:
+      "px-2 py-1 text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Fund",
     href: "/fund",
+    classes:
+      "px-2 py-1 text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Campaign",
     href: "/campaign",
+    classes:
+      "px-2 py-1 text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
-    name: "Get app",
+    name: "Log in",
     href: "/app",
-    classes: "px-4 py-2 text-white bg-black rounded-full",
+    classes:
+      "px-4 py-1 text-white text-base bg-black rounded-full hover:bg-yellow-300 hover:text-black",
   },
 ];
 
@@ -32,10 +38,10 @@ function Navbar() {
   }
   return (
     <div>
-      <div className="flex justify-between my-6 border-b">
+      <div className="flex justify-between mt-1 border-b lg:mr-10 md:mr-5 mr-1">
         <Link href="/">
-          <a className="text-5xl font-display font-bold text-[#3f3f3f]">
-            sumbyte.
+          <a className="bg-yellow-300 lg:px-2 lg:py-3 lg:text-base md:px-1 md:py-2 md:text-sm px-1 py-2 text-xs font-display font-semibold text-gray-800 mt-3 mb-5 lg:ml-10 md:ml-5 ml-2">
+            sumbyte
           </a>
         </Link>
 
@@ -51,7 +57,7 @@ function Navbar() {
           ))}
         </div>
 
-        <div className="sm:hidden">
+        <div className="sm:hidden mt-3">
           {open ? (
             <XIcon onClick={toggleMenu} className="block w-6 h-6" />
           ) : (
