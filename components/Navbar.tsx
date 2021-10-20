@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
@@ -38,10 +39,15 @@ function Navbar() {
   }
   return (
     <div>
-      <div className="flex justify-between mt-1 border-b lg:mr-10 md:mr-5 mr-1">
+      <div className="flex justify-between mt-2 mb-2 border-b lg:mr-10 md:mr-5 mr-1">
         <Link href="/">
-          <a className="bg-yellow-300 lg:px-2 lg:py-3 lg:text-base md:px-1 md:py-2 md:text-sm px-1 py-2 text-xs font-display font-semibold text-gray-800 mt-3 mb-5 lg:ml-10 md:ml-5 ml-2">
-            sumbyte
+          <a>
+            <Image
+              src={"/logos/LogoNav.svg"}
+              width="100"
+              height="70"
+              alt="logo"
+            />
           </a>
         </Link>
 
@@ -57,7 +63,7 @@ function Navbar() {
           ))}
         </div>
 
-        <div className="sm:hidden mt-3">
+        <div className="sm:hidden mt-6">
           {open ? (
             <XIcon onClick={toggleMenu} className="block w-6 h-6" />
           ) : (
@@ -70,7 +76,7 @@ function Navbar() {
         <div
           className={classes(
             open ? "" : "hidden",
-            "md:space-x-4 flex flex-col md:ml-auto border-b mb-4 pb-2"
+            "md:space-x-4 flex flex-col md:ml-auto border-b mb-4 pb-2 mt-2"
           )}
         >
           {navigations.map((item) => (
