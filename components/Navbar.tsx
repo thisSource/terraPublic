@@ -10,19 +10,19 @@ const navigations = [
     name: "My account",
     href: "/myaccount",
     classes:
-      "px-2 py-1 text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Fund",
     href: "/fund",
     classes:
-      "px-2 py-1 text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Campaign",
     href: "/campaign",
     classes:
-      "px-2 py-1 text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Log in",
@@ -39,7 +39,7 @@ function Navbar() {
   }
   return (
     <div>
-      <div className="flex justify-between mt-2 mb-2 border-b lg:mr-10 md:mr-5 mr-1">
+      <div className="flex justify-between mb-2 border-b">
         <Link href="/">
           <a>
             <Image
@@ -51,11 +51,7 @@ function Navbar() {
           </a>
         </Link>
 
-        <div
-          className={classes(
-            "hidden sm:flex items-center md:space-x-4 md:ml-auto"
-          )}
-        >
+        <div className={classes("hidden sm:flex items-center md:space-x-4")}>
           {navigations.map((item) => (
             <Link key={item.href} href={item.href}>
               <a className={classes(item.classes)}>{item.name}</a>
@@ -76,7 +72,7 @@ function Navbar() {
         <div
           className={classes(
             open ? "" : "hidden",
-            "md:space-x-4 flex flex-col md:ml-auto border-b mb-4 pb-2 mt-2"
+            "md:space-x-4 flex flex-col border-b"
           )}
         >
           {navigations.map((item) => (
