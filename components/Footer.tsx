@@ -116,7 +116,7 @@ function Footer() {
           ))}
         </div>
       </div>
-      <Link href="./welcome" passHref>
+      <Link href="/welcome" passHref>
         <div className="lg:ml-20 mb-10">
           <a className="p-2.5 px-3 rounded-full text-xs bg-black text-gray-100 font-semibold hover:bg-yellow-300 hover:text-gray-900 transition cursor-pointer">
             join Sumbyte.
