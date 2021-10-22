@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 
@@ -9,19 +9,26 @@ const navigations = [
   {
     name: "My account",
     href: "/myaccount",
+    classes:
+      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Fund",
     href: "/fund",
+    classes:
+      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Campaign",
     href: "/campaign",
+    classes:
+      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
-    name: "Get app",
+    name: "Log in",
     href: "/app",
-    classes: "px-4 py-2 text-white bg-black rounded-full",
+    classes:
+      "px-4 py-1 text-white text-base bg-black rounded-full hover:bg-yellow-300 hover:text-black",
   },
 ];
 
@@ -32,18 +39,19 @@ function Navbar() {
   }
   return (
     <div>
-      <div className="flex justify-between my-6 border-b">
+      <div className="flex justify-between mb-2 border-b">
         <Link href="/">
-          <a className="text-5xl font-display font-bold text-[#3f3f3f]">
-            sumbyte.
+          <a>
+            <Image
+              src={"/logos/LogoNav.svg"}
+              width="100"
+              height="70"
+              alt="logo"
+            />
           </a>
         </Link>
 
-        <div
-          className={classes(
-            "hidden sm:flex items-center md:space-x-4 md:ml-auto"
-          )}
-        >
+        <div className={classes("hidden sm:flex items-center md:space-x-4")}>
           {navigations.map((item) => (
             <Link key={item.href} href={item.href}>
               <a className={classes(item.classes)}>{item.name}</a>
@@ -51,7 +59,7 @@ function Navbar() {
           ))}
         </div>
 
-        <div className="sm:hidden">
+        <div className="sm:hidden mt-6">
           {open ? (
             <XIcon onClick={toggleMenu} className="block w-6 h-6" />
           ) : (
@@ -64,7 +72,7 @@ function Navbar() {
         <div
           className={classes(
             open ? "" : "hidden",
-            "md:space-x-4 flex flex-col md:ml-auto border-b mb-4 pb-2"
+            "md:space-x-4 flex flex-col border-b"
           )}
         >
           {navigations.map((item) => (
