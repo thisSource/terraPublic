@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 const titleStyle = "p-0.5 font-bold";
 const itemStyle = "p-0.5 hover:text-blue-700 hover:underline cursor-pointer";
 
@@ -83,11 +83,13 @@ function Footer() {
     "Consectetur adipiscing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrudexercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollitanim id est laborum. @sumbyte 2021";
 
   return (
-    <div className="border-t-2 mt-8">
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 lg:ml-20 md:ml-5 mt-3 mb-10 text-xs">
-        <div className="text-xl font-display font-bold text-[#3f3f3f]">
-          sumbyte.
-        </div>
+    <div className="border-t mt-8">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 mt-3 mb-10 text-xs">
+        <Link href="/">
+          <a className=" mb-3">
+            <Image src={"/logos/Logo.svg"} width="100" height="50" alt="logo" />
+          </a>
+        </Link>
         <div>
           {about.map((item) => (
             <Link key={item.id} href={item.href} passHref>
@@ -117,14 +119,14 @@ function Footer() {
         </div>
       </div>
       <Link href="/welcome" passHref>
-        <div className="lg:ml-20 mb-10">
+        <div className="mb-10">
           <a className="p-2.5 px-3 rounded-full text-xs bg-black text-gray-100 font-semibold hover:bg-yellow-300 hover:text-gray-900 transition cursor-pointer">
             join Sumbyte.
           </a>
         </div>
       </Link>
-      <div className="border-t-2">
-        <div className="text-xs lg:mx-20 md:mx-1 mt-3 mb-10">{terms}</div>
+      <div className="border-t">
+        <div className="text-xs mt-3 mb-10">{terms}</div>
       </div>
     </div>
   );

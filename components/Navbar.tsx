@@ -10,25 +10,25 @@ const navigations = [
     name: "My account",
     href: "/myaccount",
     classes:
-      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-xs font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Fund",
     href: "/fund",
     classes:
-      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-xs font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Campaign",
     href: "/campaign",
     classes:
-      "text-black text-base hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-xs font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Log in",
     href: "/app",
     classes:
-      "px-4 py-1 text-white text-base bg-black rounded-full hover:bg-yellow-300 hover:text-black",
+      "px-6 py-1 text-gray-700 text-xs bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition",
   },
 ];
 
@@ -39,19 +39,21 @@ function Navbar() {
   }
   return (
     <div>
-      <div className="flex justify-between mb-2 border-b">
+      <div className="flex lg:flex-col md:flex-col flex-row items-center justify-between border-b">
         <Link href="/">
-          <a>
+          <a className="mt-5 mb-3">
             <Image
-              src={"/logos/LogoNav.svg"}
-              width="100"
-              height="70"
+              src={"/logos/LogoStanding.svg"}
+              width="70"
+              height="50"
               alt="logo"
             />
           </a>
         </Link>
 
-        <div className={classes("hidden sm:flex items-center md:space-x-4")}>
+        <div
+          className={classes("hidden sm:flex items-center md:space-x-4 mb-2")}
+        >
           {navigations.map((item) => (
             <Link key={item.href} href={item.href}>
               <a className={classes(item.classes)}>{item.name}</a>

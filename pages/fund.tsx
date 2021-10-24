@@ -38,9 +38,8 @@ const portfolio = [
 
 function Fund() {
   return (
-    <div>
+    <div className="mt-8">
       <ContainerDevelopmentCard />
-
       <div className="grid lg:grid-cols-1 gap-10 lg:ml-20 lg:mr-20 mt-8">
         <div className="bg-gray-100 rounded overflow-hidden shadow-lg p-5">
           <div className="text-xs text-black text-left pt-1 mb-1">
