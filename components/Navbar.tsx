@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
+import LogoNavbar from "../public/logos/LogoStanding.svg";
 
 const classes = (...classNames: any[]) => classNames.filter(Boolean).join(" ");
 
@@ -10,25 +11,25 @@ const navigations = [
     name: "My account",
     href: "/myaccount",
     classes:
-      "text-black text-xs font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-sm font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Fund",
     href: "/fund",
     classes:
-      "text-black text-xs font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-sm font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Campaign",
     href: "/campaign",
     classes:
-      "text-black text-xs font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-sm font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Log in",
     href: "/app",
     classes:
-      "px-6 py-1 text-gray-700 text-xs bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition",
+      "px-6 py-1 text-gray-700 text-sm bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition",
   },
 ];
 
@@ -42,12 +43,7 @@ function Navbar() {
       <div className="flex lg:flex-col md:flex-col flex-row items-center justify-between border-b">
         <Link href="/">
           <a className="mt-5 mb-3">
-            <Image
-              src={"/logos/LogoStanding.svg"}
-              width="70"
-              height="50"
-              alt="logo"
-            />
+            <Image src={LogoNavbar} width="70" height="50" alt="logo" />
           </a>
         </Link>
 

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import LogoFooter from "../public/logos/Logo.svg";
+
 const titleStyle = "p-0.5 font-bold";
 const itemStyle = "p-0.5 hover:text-blue-700 hover:underline cursor-pointer";
 
@@ -84,10 +86,10 @@ function Footer() {
 
   return (
     <div className="border-t mt-8">
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 mt-3 mb-10 text-xs">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 mt-3 mb-10 text-sm">
         <Link href="/">
-          <a className=" mb-3">
-            <Image src={"/logos/Logo.svg"} width="100" height="50" alt="logo" />
+          <a className="mb-3">
+            <Image src={LogoFooter} width="100" height="50" alt="logo" />
           </a>
         </Link>
         <div>
