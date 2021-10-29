@@ -28,7 +28,7 @@ const handler: ServerSideHandler = async ({ req }) => {
   if (tokens) {
     return {
       redirect: {
-        destination: "/myaccount",
+        destination: "/landing",
         permanent: false,
       },
     };
