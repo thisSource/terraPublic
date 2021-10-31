@@ -32,13 +32,13 @@ function transformRequestData(data: any) {
 
 export default class TinkClient {
   baseUrl?: TinkInit["baseUrl"];
-  static client = this.instance();
+  static client = TinkClient.instance();
   static instance(): TinkClient {
-    if (this.client) {
-      return this.client;
+    if (TinkClient.client) {
+      return TinkClient.client;
     } else {
-      this.client = new TinkClient();
-      return this.client;
+      TinkClient.client = new TinkClient();
+      return TinkClient.client;
     }
   }
 
