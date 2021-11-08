@@ -22,7 +22,7 @@ type Transaction = {
 };
 
 type Props = {
-  transactions: Transaction[];
+  transactions?: Transaction[];
   loading: boolean;
 };
 
@@ -48,7 +48,10 @@ function EmptyState() {
 }
 
 function TransactionContainer(props: Props) {
-  if (props.transactions.length <= 0) {
+  if (
+    !props.loading &&
+    (!props.transactions || props.transactions.length <= 0)
+  ) {
     return (
       <div className="h-full my-44 flex justify-center">
         <EmptyState />
@@ -68,7 +71,7 @@ function TransactionContainer(props: Props) {
         </div>
       ) : (
         <div className="table w-full sm:max-w-xl">
-          {props.transactions.map((trans) => {
+          {props.transactions?.map((trans) => {
             return (
               <div key={trans.id} className="flex items-center bg-white py-2">
                 <div className="flex flex-col text-[#262626]">
