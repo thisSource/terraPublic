@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import BalanceContainer from "../components/myAccountContainerComps/BalanceContainer";
 import RedeemContainer from "../components/myAccountContainerComps/RedeemContainer";
 import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
+import TinkLinkLogin from "../components/TinkLinkLogin";
 import { useTransactions } from "../lib/hooks/useTransactions";
 
 function MyAccount() {

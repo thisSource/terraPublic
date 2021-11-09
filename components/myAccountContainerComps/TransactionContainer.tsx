@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import Link from "next/link";
 
 function formatDate(date: string) {
   return dayjs(date).format("M MMM, YYYY");
@@ -44,7 +45,7 @@ function Loading() {
 }
 
 function EmptyState() {
-  return <p className="text-3xl">No transactions :/</p>;
+  return <p className="text-3xl">No transactions found</p>;
 }
 
 function TransactionContainer(props: Props) {
@@ -53,14 +54,26 @@ function TransactionContainer(props: Props) {
     (!props.transactions || props.transactions.length <= 0)
   ) {
     return (
-      <div className="h-full my-44 flex justify-center">
+      <div className="h-full my-44 flex justify-center flex flex-col items-center">
         <EmptyState />
+        <Link href="/login">
+          <a className="underline cursor-pointer text-yellow-700">
+            Choose another account
+          </a>
+        </Link>
       </div>
     );
   }
   return (
     <div className="py-3">
-      <h1 className="text-3xl font-bold font-display">Transactions</h1>
+      <div className="flex items-center space-x-4">
+        <h1 className="text-3xl font-bold font-display">Transactions</h1>
+        <Link href="/login">
+          <a className="text-xs underline cursor-pointer text-yellow-700">
+            Refresh
+          </a>
+        </Link>
+      </div>
 
       {props.loading ? (
         <div className="flex flex-col space-y-6 mt-8">
