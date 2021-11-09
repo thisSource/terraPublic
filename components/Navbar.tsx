@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import LogoNavbar from "../public/logos/LogoStanding.svg";
+import getTinkLinkUrl from "../lib/tink/getTinkLinkUrl";
 
 const classes = (...classNames: any[]) => classNames.filter(Boolean).join(" ");
 
@@ -27,7 +28,7 @@ const navigations = [
   },
   {
     name: "Log in",
-    href: "/app",
+    href: getTinkLinkUrl(),
     classes:
       "px-6 py-1 text-gray-700 text-sm bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition",
   },
