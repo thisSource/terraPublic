@@ -13,6 +13,7 @@ export default withSession<ApiHandler>(async function (req, res) {
       req.session.set<UserAuthTokens>("auth", {
         access_token: payload.access_token,
         refresh_token: payload.refresh_token,
+        expires_in: payload.expires_in,
       });
       await req.session.save();
       res.json(payload);

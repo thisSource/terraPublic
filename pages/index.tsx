@@ -1,85 +1,39 @@
-import Head from "next/head";
-import config from "../config";
-import yellowImg from "../public/yellow.jpg";
-import { useAccounts } from "../lib/hooks/useAccounts";
-import { ListAccountsResponse } from "../lib/tink/accounts";
-import withSession, { ServerSideHandler } from "../lib/withSession";
-import Image from "next/image";
-import { UserAuthTokens } from "./callback";
+import COChart from "../components/landingPage/COChart";
+import DevChart from "../components/landingPage/DevChart";
+import How from "../components/landingPage/How";
+import Video from "../components/landingPage/Video";
+import Link from "next/link";
 
-function getTinkLinkUrl() {
-  if (!config.tink.clientId) throw new Error("tink client id must be set");
-  const base = new URL(
-    "1.0/transactions/connect-accounts/",
-    "https://link.tink.com"
-  );
-  const params = new URLSearchParams({
-    client_id: config.tink.clientId,
-    redirect_uri: config.tink.redirectUri,
-    market: "SE",
-    locale: "sv_SE",
-  });
-  return `${base.toString()}?${params.toString()}`;
-}
-
-const handler: ServerSideHandler = async ({ req }) => {
-  const tokens = req.session.get<UserAuthTokens>("auth");
-
-  if (tokens) {
-    return {
-      redirect: {
-        destination: "/landing",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: { tokens: tokens ?? null },
-  };
-};
-
-export const getServerSideProps = withSession<ServerSideHandler>(handler);
-
-function AccountsList(props: { accounts: ListAccountsResponse["accounts"] }) {
+function LandingPage() {
   return (
-    <ul>
-      {props.accounts.map((account) => (
-        <li key={account.id}>
-          {account.name}{" "}
-          {Number(account.balances.booked.amount.value.unscaledValue) /
-            Math.pow(10, Number(account.balances.booked.amount.value.scale))}
-          {account.balances.booked.amount.currencyCode}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Home() {
-  const { data, error, isLoading } = useAccounts();
-
-  return (
-    <div>
-      <Head>
-        <title>SUMBYTE</title>
-        <meta name="description" content="Next unicorn app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="container mx-auto">
-        <div>
-          <Image src={yellowImg} alt="cover photo" layout="responsive" />
+    <div className="mt-5">
+      <div className="flex flex-col lg:flex-row md:flex-row justify-between">
+        <div className="lg:mt-40 md:mt-20 mt-10 lg:ml-10">
+          <h1 className="text-gray-700 lg:text-xl md:text-base text-sm font-semibold">
+            Save money and transform the world
+          </h1>
+          <h2 className="text-yellow-300 lg:text-base md:text-sm text-xs font-semibold">
+            Transaction by transaction
+          </h2>
+          <div className="my-10">
+            <Link href="/welcome" passHref>
+              <a className="p-2.5 px-3 rounded-full text-xs bg-gray-300 text-gray-700 font-semibold hover:bg-yellow-300 hover:text-gray-700 transition cursor-pointer">
+                join Sumbyte.
+              </a>
+            </Link>
+          </div>
         </div>
-        {isLoading ? "laddar konton" : null}
-        {!data ? (
-          <a href={getTinkLinkUrl()}>Connect account</a>
-        ) : (
-          <AccountsList accounts={data.accounts} />
-        )}
-        {error ? <div>{error.message}</div> : null}
-      </main>
+        <div className="lg:mx-10 md:mx-10">
+          <Video />
+        </div>
+      </div>
+      <div className="flex lg:flex-row md:flex-row flex-col justify-around lg:mt-20 md:mt-20 border-t">
+        <DevChart />
+        <COChart />
+      </div>
+      <How />
     </div>
   );
 }
 
-export default Home;
+export default LandingPage;
