@@ -9,12 +9,12 @@ export type UserAuthTokens = {
 
 export const getServerSideProps = withSession<ServerSideHandler>(
   async function ({ req, query }) {
-    let code = query.code;
-    if (!code) {
-      return { props: { test: true } };
-    }
-    code = typeof code === "string" ? code : code[0];
     try {
+      let code = query.code;
+      if (!code) {
+        return { props: { test: true } };
+      }
+      code = typeof code === "string" ? code : code[0];
       // prettier-ignore
       const { access_token, refresh_token, expires_in } = await fetchAccessToken(code);
       req.session.set<UserAuthTokens>("auth", {
@@ -39,5 +39,5 @@ export const getServerSideProps = withSession<ServerSideHandler>(
 export default function callback() {
   // we render nothing
   // this being used just for fetching accessToken and redirect
-  return null;
+  return <div>nothing</div>;
 }
