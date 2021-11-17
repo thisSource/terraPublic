@@ -11,25 +11,25 @@ const navigations = [
     name: "My account",
     href: "/myaccount",
     classes:
-      "text-black text-sm font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-base font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Fund",
     href: "/fund",
     classes:
-      "text-black text-sm font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-base font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Campaign",
     href: "/campaign",
     classes:
-      "text-black text-sm font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
+      "text-black text-base font-semibold px-4 hover:bg-gray-200 hover:rounded curser-pointer",
   },
   {
     name: "Log in",
     href: "/login",
     classes:
-      "px-6 py-1 text-gray-700 text-sm bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition",
+      "px-6 py-1 text-gray-700 text-base bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition",
   },
 ];
 
@@ -42,8 +42,8 @@ function Navbar() {
     <div>
       <div className="flex lg:flex-col md:flex-col flex-row items-center justify-between border-b">
         <Link href="/">
-          <a className="mt-5 mb-3">
-            <Image src={LogoNavbar} width="70" height="50" alt="logo" />
+          <a className="mt-5 mb-5">
+            <Image src={LogoNavbar} width="90" height="70" alt="logo" />
           </a>
         </Link>
 

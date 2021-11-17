@@ -21,12 +21,12 @@ function HowCard(step: Props) {
         className="w-full grayscale hover:grayscale-0"
       />
       <div className="my-2 mx-2">
-        <span className="lg:text-base md:text-base text-xs text-yellow-300 font-semibold">
+        <span className="lg:text-xl md:text-base text-xs text-yellow-300 font-semibold">
           {step.step}
         </span>
       </div>
       <div className="my-2 m-2">
-        <span className="text-xs text-gray-100 font-semibold">
+        <span className="text-sm text-gray-100 font-semibold">
           {step.description}
         </span>
       </div>

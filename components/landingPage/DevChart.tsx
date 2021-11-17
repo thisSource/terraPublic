@@ -64,7 +64,7 @@ function DevChart() {
         Development 12 months
       </h2>
       <Line data={data} options={options} />
-      <h2 className="mt-8 text-green-700 text-xs font-semibold">
+      <h2 className="mt-8 text-green-700 text-base font-semibold">
         12 months + 4,2 %
       </h2>
     </div>
