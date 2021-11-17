@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import Link from "next/link";
 
 function formatDate(date: string) {
-  return dayjs(date).format("M MMM, YYYY");
+  return dayjs(date).format("DD, MMMM, YYYY");
 }
 
 function formatAmount(amount: number) {
@@ -30,13 +30,13 @@ type Props = {
 function Loading() {
   return (
     <div className="rounded-md">
-      <div className="flex sm:max-w-xl w-full justify-between animate-pulse flex-row  h-full  space-x-5">
+      <div className="flex sm:max-w-xl w-full justify-between animate-pulse flex-row h-full space-x-5">
         <div className="flex flex-col space-y-3">
-          <div className="w-36 bg-gray-300 h-6 rounded-md "></div>
-          <div className="w-24 bg-gray-300 h-6 rounded-md "></div>
+          <div className="w-36 bg-gray-300 h-6 rounded-md"></div>
+          <div className="w-24 bg-gray-300 h-6 rounded-md"></div>
         </div>
         <div className="flex flex-col space-y-3">
-          <div className="w-20 bg-gray-300 h-6 rounded-md "></div>
+          <div className="w-20 bg-gray-300 h-6 rounded-md"></div>
           <div className="w-12 bg-gray-300 h-6 rounded-md self-end"></div>
         </div>
       </div>
@@ -54,7 +54,7 @@ function TransactionContainer(props: Props) {
     (!props.transactions || props.transactions.length <= 0)
   ) {
     return (
-      <div className="h-full my-44 flex justify-center flex flex-col items-center">
+      <div className="h-full my-44 flex justify-center flex-col items-center">
         <EmptyState />
         <Link href="/login">
           <a className="underline cursor-pointer text-yellow-700">
@@ -90,7 +90,7 @@ function TransactionContainer(props: Props) {
                 <div className="flex flex-col text-[#262626]">
                   <span className="font-normal">
                     {trans.seller}
-                    <span className="ml-2 text-[#52B390] text-xs">
+                    <span className="ml-20 text-[#52B390] text-xs">
                       {trans.CO2}
                     </span>
                   </span>

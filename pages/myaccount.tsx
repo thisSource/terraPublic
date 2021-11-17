@@ -5,17 +5,13 @@ import RedeemContainer from "../components/myAccountContainerComps/RedeemContain
 import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
 import TinkLinkLogin from "../components/TinkLinkLogin";
 import { useTransactions } from "../lib/hooks/useTransactions";
-import Id from "./accounts/[id]/transactions";
 import Link from "next/link";
-
-function formatDate(date: string) {
-  return dayjs(date).format("MM");
-}
+import { getServerSideProps } from "./callback";
 
 function MyAccount() {
   const { data, isLoading, error } = useTransactions();
 
-  if (data?.transactions.length === 0 || data?.transactions === undefined) {
+  if (data?.transactions === undefined) {
     return (
       <div className="h-full my-44 justify-center flex flex-col items-center">
         <Link href="/login">
@@ -26,36 +22,32 @@ function MyAccount() {
       </div>
     );
   }
+
   let transactionsForDisplay: any | undefined = data?.transactions;
   let paymentTransactions = [];
   let transactionsCurrentMonth = [];
-  let numberOfTransactionsToDisplay = 0;
+  let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
 
-  //Get current month (first month in array) and set it to an Int. (Setting it to int for later useage.)
-  let getCurrentMonth = data?.transactions[0].dates.booked;
-  let currentMonth = parseInt(formatDate(getCurrentMonth));
-
-  //Get payment transactions only
   for (let i = 0; i < transactionsForDisplay.length; i++) {
-    if (transactionsForDisplay[i].amount.value.unscaledValue < 0) {
+    if (
+      transactionsForDisplay[i].amount.value.unscaledValue < 0 &&
+      dayjs(transactionsForDisplay[i].dates.booked).month() === currentMonth
+    ) {
       paymentTransactions.push(transactionsForDisplay[i]);
-    }
-  }
-
-  //Get transactions for current month only
-  for (let i = 0; i < paymentTransactions.length; i++) {
-    transactionsCurrentMonth.push(
-      parseInt(formatDate(paymentTransactions[i].dates.booked))
-    );
-    if (transactionsCurrentMonth[i] === currentMonth) {
-      numberOfTransactionsToDisplay = transactionsCurrentMonth.length;
     }
   }
 
   transactionsCurrentMonth = paymentTransactions.slice(
     0,
-    numberOfTransactionsToDisplay
+    paymentTransactions.length
   );
+
+  let sumOfTransactionsCurrentMonth = 0;
+  for (let i = 0; i < transactionsCurrentMonth.length; i++) {
+    sumOfTransactionsCurrentMonth += parseFloat(
+      transactionsCurrentMonth[i].amount.value.unscaledValue
+    );
+  }
 
   return (
     <Fragment>
