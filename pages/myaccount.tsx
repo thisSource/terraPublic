@@ -42,13 +42,6 @@ function MyAccount() {
     paymentTransactions.length
   );
 
-  let sumOfTransactionsCurrentMonth = 0;
-  for (let i = 0; i < transactionsCurrentMonth.length; i++) {
-    sumOfTransactionsCurrentMonth += parseFloat(
-      transactionsCurrentMonth[i].amount.value.unscaledValue
-    );
-  }
-
   return (
     <Fragment>
       <BalanceContainer />
