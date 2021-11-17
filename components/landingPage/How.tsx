@@ -30,7 +30,7 @@ const steps = [
 function How() {
   return (
     <div className="mt-20 mb-20 border-t">
-      <h1 className="mb-4 mt-4 text-base font-semibold">Get started</h1>
+      <h1 className="mb-4 mt-4 text-xl font-semibold">Get started</h1>
       <div className="grid lg:grid-cols-4 grid-cols-2 gap-5 mt-2">
         {steps.map((step) => (
           <HowCard

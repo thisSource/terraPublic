@@ -1,6 +1,6 @@
 function Video() {
   return (
-    <video width={500} height={500} autoPlay loop muted>
+    <video width={600} height={600} autoPlay loop muted>
       <source src="landing/sky.mp4" />
     </video>
   );

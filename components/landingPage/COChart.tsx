@@ -66,7 +66,7 @@ function COChart() {
         CO2 reduction per 100 €
       </h2>
       <Line data={data} options={options} />
-      <h2 className="mt-8 text-green-700 text-xs font-semibold">
+      <h2 className="mt-8 text-green-700 text-base font-semibold">
         - 5,3 kg 12 months
       </h2>
     </div>
