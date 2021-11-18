@@ -3,10 +3,8 @@ import React, { Fragment } from "react";
 import BalanceContainer from "../components/myAccountContainerComps/BalanceContainer";
 import RedeemContainer from "../components/myAccountContainerComps/RedeemContainer";
 import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
-import TinkLinkLogin from "../components/TinkLinkLogin";
 import { useTransactions } from "../lib/hooks/useTransactions";
 import Link from "next/link";
-import { getServerSideProps } from "./callback";
 
 function MyAccount() {
   const { data, isLoading, error } = useTransactions();
@@ -23,24 +21,18 @@ function MyAccount() {
     );
   }
 
-  let transactionsForDisplay: any | undefined = data?.transactions;
-  let paymentTransactions = [];
+  let transactionsForDisplay = data?.transactions;
   let transactionsCurrentMonth = [];
   let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
 
   for (let i = 0; i < transactionsForDisplay.length; i++) {
     if (
-      transactionsForDisplay[i].amount.value.unscaledValue < 0 &&
+      Number(transactionsForDisplay[i].amount.value.unscaledValue) < 0 &&
       dayjs(transactionsForDisplay[i].dates.booked).month() === currentMonth
     ) {
-      paymentTransactions.push(transactionsForDisplay[i]);
+      transactionsCurrentMonth.push(transactionsForDisplay[i]);
     }
   }
-
-  transactionsCurrentMonth = paymentTransactions.slice(
-    0,
-    paymentTransactions.length
-  );
 
   return (
     <Fragment>
