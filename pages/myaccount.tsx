@@ -9,7 +9,7 @@ import Link from "next/link";
 function MyAccount() {
   const { data, isLoading, error } = useTransactions();
 
-  if (data?.transactions === undefined) {
+  if (data?.transactions === undefined || data?.transactions.length === 0) {
     return (
       <div className="h-full my-44 justify-center flex flex-col items-center">
         <Link href="/login">
