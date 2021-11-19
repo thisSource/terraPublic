@@ -1,10 +1,10 @@
 function BalanceContainer() {
   return (
-    <div>
-      <div>My savings</div>
-      <div>
+    <div className="py-4 lg:mr-40 md:mr-10">
+      <div className="text-3xl font-bold font-display">My savings</div>
+      <div className="py-4 flex flex-row items-center justify-between font-semibold text-2xl">
         SEK 84 153.34
-        <div> + 4,5 %</div>
+        <span> + 4,5 %</span>
       </div>
     </div>
   );
