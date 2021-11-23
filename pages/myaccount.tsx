@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import BalanceContainer from "../components/myAccountContainerComps/BalanceContainer";
 import RedeemContainer from "../components/myAccountContainerComps/RedeemContainer";
 import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
@@ -10,6 +10,8 @@ import { Transaction } from "../lib/tink/transactions";
 
 function MyAccount() {
   const { data, isLoading, error } = useTransactions();
+
+  let [savings, setSavings] = useState(0);
 
   if (data?.transactions === undefined || data?.transactions.length === 0) {
     return (
@@ -58,9 +60,9 @@ function MyAccount() {
   }
   return (
     <Fragment>
-      <BalanceContainer />
+      <BalanceContainer value={savings.toFixed(2)} />
 
-      <h1 className="text-xl font-semibold font-display lg:mr-40 md:mr-10 border-b-2">
+      <h1 className="text-xl font-semibold font-display lg:mr-80 md:mr-10 border-b">
         Transfer to your savings
       </h1>
 
@@ -69,6 +71,8 @@ function MyAccount() {
           key={month + Math.random()}
           sumOfTrans={sumOfNegativeTransactions(month)}
           currentMonth={(month + 1).toString()}
+          updateSavings={setSavings}
+          value={savings + sumOfNegativeTransactions(month) * 0.01 * -1}
         />
       ))}
 
@@ -88,7 +92,11 @@ function MyAccount() {
               Math.pow(10, parseInt(t.amount.value.scale))) *
             0.01 *
             -1,
-          CO2: 2,
+          CO2:
+            (parseInt(t.amount.value.unscaledValue) /
+              Math.pow(10, parseInt(t.amount.value.scale))) *
+            0.002 *
+            -1,
         }))}
         loading={isLoading}
       />
