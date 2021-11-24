@@ -60,7 +60,7 @@ function MyAccount() {
   }
   return (
     <Fragment>
-      <BalanceContainer value={savings.toFixed(2)} />
+      <BalanceContainer value={savings} />
 
       <h1 className="text-xl font-semibold font-display lg:mr-80 md:mr-10 border-b">
         Transfer to your savings
@@ -100,7 +100,7 @@ function MyAccount() {
         }))}
         loading={isLoading}
       />
-      <RedeemContainer />
+      <RedeemContainer value={savings} />
     </Fragment>
   );
 }

@@ -1,5 +1,13 @@
+function formatAmount(amount: number) {
+  return new Intl.NumberFormat("sv-SE", {
+    style: "currency",
+    currency: "SEK",
+    currencyDisplay: "narrowSymbol",
+  }).format(amount);
+}
+
 interface Props {
-  value: string;
+  value: number;
 }
 
 function BalanceContainer(savings: Props) {
@@ -9,8 +17,14 @@ function BalanceContainer(savings: Props) {
         My savings
       </div>
       <div className="py-4 flex flex-row items-center justify-between font-semibold text-xl">
-        <span>SEK {savings.value}</span>
-        <span> + 4,5 %</span>
+        <div className="flex flex-col">
+          <span className="text-2xl">{formatAmount(savings.value)}</span>
+          <span className="text-green-700 text-sm"> + 4,5 %</span>
+        </div>
+        <div className="flex flex-col">
+          <span>CO2 savings total</span>
+          <span className="text-green-700 text-base">1023 Kg</span>
+        </div>
       </div>
     </div>
   );

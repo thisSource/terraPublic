@@ -47,7 +47,7 @@ function Transfer(props: Props) {
         <span className={buttonStyle} onClick={clickHandler}>
           {buttonText}
         </span>
-        <span className="font-semibold text-base text-green-500">
+        <span className="font-semibold text-base text-green-700">
           {formatAmount(props.sumOfTrans * -1 * 0.01)}
         </span>
       </div>
