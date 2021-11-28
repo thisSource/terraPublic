@@ -15,12 +15,11 @@ let transferButtonText = "Transfer to savings";
 function Transfer(props: Props) {
   let [transferred, setTransferred] = useState(false);
 
-  //I can´t get the setState to disable button and also run the props.updateSavings(props.value);
   function transferSavings() {
     transferred ? setTransferred(false) : setTransferred(true);
     transferButtonText = "Completed";
     transferButtonStyle =
-      "px-5 py-1 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed	";
+      "px-5 py-1 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed";
     props.updateSavings(props.value);
   }
 
