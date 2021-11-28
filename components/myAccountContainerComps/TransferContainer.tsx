@@ -8,18 +8,20 @@ interface Props {
   value: number;
 }
 
-let isClicked = false;
-let buttonStyle =
+let transferButtonStyle =
   "px-5 py-1 text-gray-700 text-base bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition cursor-pointer";
-let buttonText = "Transfer to savings";
+let transferButtonText = "Transfer to savings";
 
 function Transfer(props: Props) {
   let [transferred, setTransferred] = useState(false);
 
   //I can´t get the setState to disable button and also run the props.updateSavings(props.value);
   function transferSavings() {
-    transferred ? setTransferred(false) : setTransferred(true),
-      props.updateSavings(props.value);
+    transferred ? setTransferred(false) : setTransferred(true);
+    transferButtonText = "Completed";
+    transferButtonStyle =
+      "px-5 py-1 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed	";
+    props.updateSavings(props.value);
   }
 
   return (
@@ -32,12 +34,15 @@ function Transfer(props: Props) {
       </div>
       <div className="py-1 flex flex-row items-center justify-between">
         <button
-          className={buttonStyle}
+          className={transferButtonStyle}
           disabled={transferred}
           onClick={transferSavings}
         >
-          click me
+          {transferButtonText}
         </button>
+        <span className="text-green-700">
+          {formatAmount(props.sumOfTrans * 0.01 * -1)}
+        </span>
       </div>
       <div className="mt-2 border-b"></div>
     </div>

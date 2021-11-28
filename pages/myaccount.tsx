@@ -86,7 +86,7 @@ function MyAccount() {
 
       {availableMonths().map((month) => (
         <TransferContainer
-          key={month + Math.random()}
+          key={month + sumOfNegativeTransactionsByMonth}
           sumOfTrans={sumOfNegativeTransactionsByMonth}
           currentMonth={(month + 1).toString()}
           updateSavings={setSavings}
