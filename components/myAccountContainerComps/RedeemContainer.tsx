@@ -1,10 +1,4 @@
-function formatAmount(amount: number) {
-  return new Intl.NumberFormat("sv-SE", {
-    style: "currency",
-    currency: "SEK",
-    currencyDisplay: "narrowSymbol",
-  }).format(amount);
-}
+import { formatAmount } from "../utils/Helpers";
 
 interface Props {
   value: number;

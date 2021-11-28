@@ -7,6 +7,7 @@ import { useTransactions } from "../lib/hooks/useTransactions";
 import Link from "next/link";
 import TransferContainer from "../components/myAccountContainerComps/TransferContainer";
 import { Transaction } from "../lib/tink/transactions";
+import { amountHandler } from "../components/utils/Helpers";
 
 function MyAccount() {
   const { data, isLoading, error } = useTransactions();
@@ -30,10 +31,12 @@ function MyAccount() {
 
   function availableMonths() {
     let months: number[] = [];
-    transactionsForDisplay.forEach((trans: { dates: { booked: string } }) => {
+    transactionsForDisplay.map((trans) => {
       months.push(dayjs(trans.dates.booked).month());
     });
-    return months.filter((v, i, a) => a.indexOf(v) === i);
+    return months.filter(
+      (months, index, orgArray) => orgArray.indexOf(months) === index
+    );
   }
 
   function negativeTransactionFromMonth(
@@ -48,16 +51,33 @@ function MyAccount() {
   }
 
   function sumOfNegativeTransactions(targetMonth: number) {
-    return (
-      negativeTransactionFromMonth(targetMonth, transactionsForDisplay)
-        .map((items) => {
-          return parseInt(items.amount.value.unscaledValue);
-        })
-        .reduce((acc, curr) => {
-          return acc + curr;
-        }) / 100
-    );
+    let sumOfTrans = negativeTransactionFromMonth(
+      targetMonth,
+      transactionsForDisplay
+    ).reduce((acc, curr) => {
+      return acc + parseInt(curr.amount.value.unscaledValue);
+    }, 0);
+    return sumOfTrans / 100;
   }
+
+  function insertTransactions() {
+    return negativeTransactionFromMonth(
+      currentMonth,
+      transactionsForDisplay
+    )?.map((t) => ({
+      id: t.id,
+      amount: amountHandler(t, 1, 1),
+      seller: t.descriptions.display,
+      date: t.dates.booked,
+      investment: amountHandler(t, 0.01, -1),
+      CO2: amountHandler(t, 0.02, -1)
+    }));
+  }
+
+  let [sumOfNegativeTransactionsByMonth] = availableMonths().map((month) =>
+    sumOfNegativeTransactions(month)
+  );
+
   return (
     <Fragment>
       <BalanceContainer value={savings} />
@@ -69,35 +89,15 @@ function MyAccount() {
       {availableMonths().map((month) => (
         <TransferContainer
           key={month + Math.random()}
-          sumOfTrans={sumOfNegativeTransactions(month)}
+          sumOfTrans={sumOfNegativeTransactionsByMonth}
           currentMonth={(month + 1).toString()}
           updateSavings={setSavings}
-          value={savings + sumOfNegativeTransactions(month) * 0.01 * -1}
+          value={savings + sumOfNegativeTransactionsByMonth * 0.01 * -1}
         />
       ))}
 
       <TransactionContainer
-        transactions={negativeTransactionFromMonth(
-          currentMonth,
-          transactionsForDisplay
-        )?.map((t) => ({
-          id: t.id,
-          amount:
-            parseInt(t.amount.value.unscaledValue) /
-            Math.pow(10, parseInt(t.amount.value.scale)),
-          seller: t.descriptions.display,
-          date: t.dates.booked,
-          investment:
-            (parseInt(t.amount.value.unscaledValue) /
-              Math.pow(10, parseInt(t.amount.value.scale))) *
-            0.01 *
-            -1,
-          CO2:
-            (parseInt(t.amount.value.unscaledValue) /
-              Math.pow(10, parseInt(t.amount.value.scale))) *
-            0.002 *
-            -1,
-        }))}
+        transactions={insertTransactions()}
         loading={isLoading}
       />
       <RedeemContainer value={savings} />
