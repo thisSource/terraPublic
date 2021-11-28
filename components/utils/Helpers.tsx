@@ -4,7 +4,7 @@ export function formatAmount(amount: number) {
   return new Intl.NumberFormat("sv-SE", {
     style: "currency",
     currency: "SEK",
-    currencyDisplay: "narrowSymbol"
+    currencyDisplay: "narrowSymbol",
   }).format(amount);
 }
 

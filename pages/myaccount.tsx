@@ -54,9 +54,7 @@ function MyAccount() {
     let sumOfTrans = negativeTransactionFromMonth(
       targetMonth,
       transactionsForDisplay
-    ).reduce((acc, curr) => {
-      return acc + parseInt(curr.amount.value.unscaledValue);
-    }, 0);
+    ).reduce((acc, curr) => acc + parseInt(curr.amount.value.unscaledValue), 0);
     return sumOfTrans / 100;
   }
 
@@ -70,7 +68,7 @@ function MyAccount() {
       seller: t.descriptions.display,
       date: t.dates.booked,
       investment: amountHandler(t, 0.01, -1),
-      CO2: amountHandler(t, 0.02, -1)
+      CO2: amountHandler(t, 0.02, -1),
     }));
   }
 
