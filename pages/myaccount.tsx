@@ -1,13 +1,18 @@
 import dayjs from "dayjs";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import BalanceContainer from "../components/myAccountContainerComps/BalanceContainer";
 import RedeemContainer from "../components/myAccountContainerComps/RedeemContainer";
 import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
 import { useTransactions } from "../lib/hooks/useTransactions";
 import Link from "next/link";
+import TransferContainer from "../components/myAccountContainerComps/TransferContainer";
+import { Transaction } from "../lib/tink/transactions";
+import { amountHandler } from "../components/utils/Helpers";
 
 function MyAccount() {
   const { data, isLoading, error } = useTransactions();
+
+  let [savings, setSavings] = useState(0);
 
   if (data?.transactions === undefined || data?.transactions.length === 0) {
     return (
@@ -22,38 +27,78 @@ function MyAccount() {
   }
 
   let transactionsForDisplay = data?.transactions;
-  let transactionsCurrentMonth = [];
   let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
 
-  for (let i = 0; i < transactionsForDisplay.length; i++) {
-    if (
-      Number(transactionsForDisplay[i].amount.value.unscaledValue) < 0 &&
-      dayjs(transactionsForDisplay[i].dates.booked).month() === currentMonth
-    ) {
-      transactionsCurrentMonth.push(transactionsForDisplay[i]);
-    }
+  function availableMonths() {
+    let months: number[] = [];
+    transactionsForDisplay.map((trans) => {
+      months.push(dayjs(trans.dates.booked).month());
+    });
+    return months.filter(
+      (months, index, orgArray) => orgArray.indexOf(months) === index
+    );
   }
+
+  function negativeTransactionFromMonth(
+    targetMonth: number,
+    transactions: Transaction[]
+  ) {
+    return transactions.filter((tran) => {
+      const isTargetMonth = dayjs(tran.dates.booked).month() === targetMonth;
+      const isWithdrawal = parseInt(tran.amount.value.unscaledValue) < 0;
+      return isTargetMonth && isWithdrawal;
+    });
+  }
+
+  function sumOfNegativeTransactions(targetMonth: number) {
+    let sumOfTrans = negativeTransactionFromMonth(
+      targetMonth,
+      transactionsForDisplay
+    ).reduce((acc, curr) => acc + parseInt(curr.amount.value.unscaledValue), 0);
+    return sumOfTrans / 100;
+  }
+
+  function insertTransactions() {
+    return negativeTransactionFromMonth(
+      currentMonth,
+      transactionsForDisplay
+    )?.map((t) => ({
+      id: t.id,
+      amount: amountHandler(t, 1, 1),
+      seller: t.descriptions.display,
+      date: t.dates.booked,
+      investment: amountHandler(t, 0.01, -1),
+      CO2: amountHandler(t, 0.02, -1),
+    }));
+  }
+
+  let [sumOfNegativeTransactionsByMonth] = availableMonths().map((month) =>
+    sumOfNegativeTransactions(month)
+  );
 
   return (
     <Fragment>
-      <BalanceContainer />
+      <BalanceContainer value={savings} />
+
+      <h1 className="text-xl font-semibold font-display lg:mr-80 md:mr-10 border-b">
+        Transfer to your savings
+      </h1>
+
+      {availableMonths().map((month) => (
+        <TransferContainer
+          key={month + sumOfNegativeTransactionsByMonth}
+          sumOfTrans={sumOfNegativeTransactionsByMonth}
+          currentMonth={(month + 1).toString()}
+          updateSavings={setSavings}
+          value={savings + sumOfNegativeTransactionsByMonth * 0.01 * -1}
+        />
+      ))}
+
       <TransactionContainer
-        transactions={transactionsCurrentMonth?.map((t) => ({
-          id: t.id,
-          amount:
-            parseInt(t.amount.value.unscaledValue) /
-            Math.pow(10, parseInt(t.amount.value.scale)),
-          seller: t.descriptions.display,
-          date: t.dates.booked,
-          investment:
-            (parseInt(t.amount.value.unscaledValue) /
-              Math.pow(10, parseInt(t.amount.value.scale))) *
-            0.01,
-          CO2: 2,
-        }))}
+        transactions={insertTransactions()}
         loading={isLoading}
       />
-      <RedeemContainer />
+      <RedeemContainer value={savings} />
     </Fragment>
   );
 }
