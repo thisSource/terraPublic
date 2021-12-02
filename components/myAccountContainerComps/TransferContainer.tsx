@@ -1,4 +1,4 @@
-import { formatAmount, formatDate } from "../utils/Helpers";
+import { formatAmount, formatMonth } from "../../lib/helpers";
 import { useState } from "react";
 
 interface Props {
@@ -8,18 +8,28 @@ interface Props {
   value: number;
 }
 
-let transferButtonStyle =
-  "px-5 py-1 text-gray-700 text-base bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition cursor-pointer";
-let transferButtonText = "Transfer to savings";
+const transButton = {
+  transferButtonStyle:
+    "px-5 py-1 text-gray-700 text-base bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition cursor-pointer",
+  completedButtonStyle:
+    "px-5 py-1 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed",
+  transferButtonText: "Transfer to savings",
+  completedButtonText: "Completed",
+};
 
 function Transfer(props: Props) {
   let [transferred, setTransferred] = useState(false);
+  let [buttonStyle, setButtonStyle] = useState({
+    style: transButton.transferButtonStyle,
+    text: transButton.transferButtonText,
+  });
 
   function transferSavings() {
     transferred ? setTransferred(false) : setTransferred(true);
-    transferButtonText = "Completed";
-    transferButtonStyle =
-      "px-5 py-1 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed";
+    setButtonStyle({
+      style: transButton.completedButtonStyle,
+      text: transButton.completedButtonText,
+    });
     props.updateSavings(props.value);
   }
 
@@ -27,22 +37,29 @@ function Transfer(props: Props) {
     <div className="py-2 lg:mr-80 md:mr-10">
       <div className="py-4 flex flex-row items-center justify-between">
         <span className="ml-2">
-          Transactions {formatDate(props.currentMonth)}
+          Transactions {formatMonth(props.currentMonth)}
         </span>
         <span>{formatAmount(props.sumOfTrans * -1)}</span>
       </div>
-      <div className="py-1 flex flex-row items-center justify-between">
-        <button
-          className={transferButtonStyle}
-          disabled={transferred}
-          onClick={transferSavings}
-        >
-          {transferButtonText}
-        </button>
+      <div className="ml-2 flex flex-row items-center justify-between">
+        <span>CO2 savings</span>
         <span className="text-green-700">
+          {(props.sumOfTrans * 0.01 * 0.005 * -1).toFixed(3)} Kg
+        </span>
+      </div>
+      <div className="py-4 flex flex-row items-center justify-between">
+        <button
+          className={buttonStyle.style}
+          disabled={transferred}
+          onClick={() => transferSavings()}
+        >
+          {buttonStyle.text}
+        </button>
+        <span className="text-green-700 font-semibold">
           {formatAmount(props.sumOfTrans * 0.01 * -1)}
         </span>
       </div>
+
       <div className="mt-2 border-b"></div>
     </div>
   );
