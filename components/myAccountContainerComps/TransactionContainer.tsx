@@ -1,9 +1,5 @@
-import dayjs from "dayjs";
 import Link from "next/link";
-
-function formatDate(date: string) {
-  return dayjs(date).format("DD, MMMM, YYYY");
-}
+import { formatDate } from "../../lib/helpers";
 
 function formatAmount(amount: number) {
   return new Intl.NumberFormat("sv-SE", {
@@ -65,9 +61,9 @@ function TransactionContainer(props: Props) {
     );
   }
   return (
-    <div className="py-3">
-      <div className="flex items-center space-x-4">
-        <h1 className="text-3xl font-bold font-display">Transactions</h1>
+    <div className="py-3 lg:mr-80 md:mr-10">
+      <div className="flex items-center space-x-4 border-b">
+        <h1 className="text-xl font-bold font-display">Transactions</h1>
         <Link href="/login">
           <a className="text-xs underline cursor-pointer text-yellow-700">
             Refresh
@@ -83,33 +79,51 @@ function TransactionContainer(props: Props) {
           <Loading />
         </div>
       ) : (
-        <div className="table w-full sm:max-w-xl">
-          {props.transactions?.map((trans) => {
-            return (
-              <div key={trans.id} className="flex items-center bg-white py-2">
-                <div className="flex flex-col text-[#262626]">
-                  <span className="font-normal">
+        <div className="">
+          <div className="flex flex-row justify-between py-2">
+            <span className="text-sm lg:text-base md:text-base font-semibold">
+              Seller
+            </span>
+            <span className="text-sm lg:text-base md:text-base font-semibold ml-20">
+              CO2 removed
+            </span>
+            <div className="flex flex-col mr-8">
+              <span className="text-sm lg:text-base md:text-base font-semibold">
+                Transaction /
+              </span>
+              <span className="text-sm lg:text-base md:text-base font-semibold">
+                1 % To savings
+              </span>
+            </div>
+          </div>
+          <div className="h-80 overflow-x-auto">
+            {props.transactions?.map((trans) => {
+              return (
+                <div key={trans.id} className="bg-white">
+                  <span className="text-sm lg:text-base md:text-base">
                     {trans.seller}
-                    <span className="ml-20 text-[#52B390] text-xs">
-                      {trans.CO2}
-                    </span>
                   </span>
-                  <time className="text-[#AEC0C6] text-sm">
-                    {formatDate(trans.date)}
-                  </time>
-                </div>
+                  <div className="flex flex-row justify-between">
+                    <time className="text-[#AEC0C6] text-sm">
+                      {formatDate(trans.date)}
+                    </time>
 
-                <div className="flex flex-col ml-auto">
-                  <span className="font-normal text-[#262626]">
-                    {formatAmount(trans.amount)}
-                  </span>
-                  <span className="text-[#52B390] text-sm">
-                    {formatAmount(trans.investment)}
-                  </span>
+                    <span className="text-[#52B390] text-sm lg:text-base md:text-base">
+                      {trans.CO2.toFixed(2)} kg
+                    </span>
+                    <div className="flex flex-col mr-8">
+                      <span className="text-sm lg:text-base md:text-base text-[#262626]">
+                        {formatAmount(trans.amount)}
+                      </span>
+                      <span className="text-[#52B390] text-sm lg:text-base md:text-base text-right">
+                        {formatAmount(trans.investment)}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
