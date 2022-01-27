@@ -2,6 +2,7 @@ import { formatAmount } from "../../lib/helpers";
 
 interface Props {
   value: number;
+  CO2perSEK: number;
 }
 
 function BalanceContainer(savings: Props) {
@@ -18,7 +19,7 @@ function BalanceContainer(savings: Props) {
         <div className="flex flex-col">
           <span>CO2 savings total</span>
           <span className="text-green-700 text-base text-right">
-            {(savings.value * 0.005).toFixed(3)} Kg
+            {(savings.value * savings.CO2perSEK).toFixed(3)} Kg
           </span>
         </div>
       </div>

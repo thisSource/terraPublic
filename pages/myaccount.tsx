@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import BalanceContainer from "../components/myAccountContainerComps/BalanceContainer";
 import RedeemContainer from "../components/myAccountContainerComps/RedeemContainer";
 import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
@@ -33,7 +33,8 @@ function sumOfNegativeTransactions(
 
 function transactions(
   currentMonth: number,
-  transactionsForDisplay: Transaction[]
+  transactionsForDisplay: Transaction[],
+  CO2valueSEK: number
 ) {
   return negativeTransactionFromMonth(
     currentMonth,
@@ -44,11 +45,21 @@ function transactions(
     seller: t.descriptions.display,
     date: t.dates.booked,
     investment: amountHandler(t, 0.01, -1),
-    CO2: amountHandler(t, 0.005, -1),
+    CO2: amountHandler(t, CO2valueSEK, -1),
   }));
 }
 
 function MyAccount() {
+  let [CO2dataValueSEK, setCO2dataValueSEK]: any = useState([]);
+  async function fetchPortfolio() {
+    const res = await fetch("api/portfolio/portfoliostats");
+    let data = await res.json();
+    setCO2dataValueSEK(data[1].CO2perSEK);
+  }
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+
   const { data, isLoading, error } = useTransactions();
   let [savings, setSavings] = useState(0);
 
@@ -79,7 +90,7 @@ function MyAccount() {
 
   return (
     <Fragment>
-      <BalanceContainer value={savings} />
+      <BalanceContainer value={savings} CO2perSEK={CO2dataValueSEK} />
 
       <h1 className="text-xl font-semibold font-display lg:mr-80 md:mr-10 border-b">
         Transfer to your savings
@@ -95,11 +106,16 @@ function MyAccount() {
             savings +
             sumOfNegativeTransactionsByMonth[currentMonth - month] * 0.01 * -1
           }
+          CO2perSEK={CO2dataValueSEK}
         />
       ))}
 
       <TransactionContainer
-        transactions={transactions(currentMonth, transactionsForDisplay)}
+        transactions={transactions(
+          currentMonth,
+          transactionsForDisplay,
+          CO2dataValueSEK / 100
+        )}
         loading={isLoading}
       />
       <RedeemContainer value={savings} />
