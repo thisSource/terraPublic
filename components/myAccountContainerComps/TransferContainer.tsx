@@ -6,7 +6,7 @@ interface Props {
   currentMonth: string;
   updateSavings: (value: number) => void;
   value: number;
-  CO2perSEK: number;
+  co2perSEK: number;
 }
 
 const transButton = {
@@ -45,7 +45,7 @@ function Transfer(props: Props) {
       <div className="ml-2 flex flex-row items-center justify-between">
         <span>CO2 savings</span>
         <span className="text-green-700">
-          {(props.sumOfTrans * 0.01 * props.CO2perSEK * -1).toFixed(3)} Kg
+          {(props.sumOfTrans * 0.01 * props.co2perSEK * -1).toFixed(3)} Kg
         </span>
       </div>
       <div className="py-4 flex flex-row items-center justify-between">

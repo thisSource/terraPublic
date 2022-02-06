@@ -34,7 +34,7 @@ function sumOfNegativeTransactions(
 function transactions(
   currentMonth: number,
   transactionsForDisplay: Transaction[],
-  CO2valueSEK: number
+  co2valueSEK: number
 ) {
   return negativeTransactionFromMonth(
     currentMonth,
@@ -45,16 +45,16 @@ function transactions(
     seller: t.descriptions.display,
     date: t.dates.booked,
     investment: amountHandler(t, 0.01, -1),
-    CO2: amountHandler(t, CO2valueSEK, -1),
+    CO2: amountHandler(t, co2valueSEK, -1),
   }));
 }
 
 function MyAccount() {
-  let [CO2dataValueSEK, setCO2dataValueSEK]: any = useState([]);
+  let [co2dataValueSEK, setco2dataValueSEK]: any = useState([]);
   async function fetchPortfolio() {
-    const res = await fetch("api/portfolio/portfoliostats");
+    const res = await fetch("api/portfolio/iexbase");
     let data = await res.json();
-    setCO2dataValueSEK(data[1].CO2perSEK);
+    setco2dataValueSEK(data[1].co2KgPerSEK);
   }
   useEffect(() => {
     fetchPortfolio();
@@ -62,7 +62,7 @@ function MyAccount() {
 
   const { data, isLoading, error } = useTransactions();
   let [savings, setSavings] = useState(0);
-
+  let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
   if (data?.transactions === undefined || data?.transactions.length === 0) {
     return (
       <div className="h-full my-44 justify-center flex flex-col items-center">
@@ -76,7 +76,7 @@ function MyAccount() {
   }
 
   let transactionsForDisplay = data?.transactions;
-  let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
+
   const availableMonths = [
     ...Array.from(
       new Set(
@@ -90,7 +90,7 @@ function MyAccount() {
 
   return (
     <Fragment>
-      <BalanceContainer value={savings} CO2perSEK={CO2dataValueSEK} />
+      <BalanceContainer value={savings} CO2perSEK={co2dataValueSEK} />
 
       <h1 className="text-xl font-semibold font-display lg:mr-80 md:mr-10 border-b">
         Transfer to your savings
@@ -100,13 +100,13 @@ function MyAccount() {
         <TransferContainer
           key={month}
           sumOfTrans={sumOfNegativeTransactionsByMonth[currentMonth - month]}
-          currentMonth={month.toString()}
+          currentMonth={(currentMonth + month).toString()}
           updateSavings={setSavings}
           value={
             savings +
             sumOfNegativeTransactionsByMonth[currentMonth - month] * 0.01 * -1
           }
-          CO2perSEK={CO2dataValueSEK}
+          co2perSEK={co2dataValueSEK}
         />
       ))}
 
@@ -114,7 +114,7 @@ function MyAccount() {
         transactions={transactions(
           currentMonth,
           transactionsForDisplay,
-          CO2dataValueSEK / 100
+          co2dataValueSEK / 100
         )}
         loading={isLoading}
       />
