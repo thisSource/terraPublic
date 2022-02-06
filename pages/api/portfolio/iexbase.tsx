@@ -5,7 +5,7 @@ for (const [key, value] of Object.entries(portfolio)) {
   portfolioSymbols += `${value.symbol},`;
 }
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   let stockResponse = await fetch(
     `https://cloud.iexapis.com/v1/stock/market/batch?&types=quote&symbols=${portfolioSymbols}&token=${process.env.IEX_API_KEY}`
   );
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   );
   let currencyData = await currencyResponse.json();
 
-  function tonsOfCO2avoided(GW) {
+  function tonsOfCO2avoided(GW: number) {
     const kWhperGW = 2483404087.773434;
     const lbsCO2perMWh = 1562.4;
     const mLfactor = 4.536;
