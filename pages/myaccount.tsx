@@ -50,7 +50,7 @@ function transactions(
 }
 
 function MyAccount() {
-  let [co2dataValueSEK, setco2dataValueSEK]: any = useState([]);
+  let [co2dataValueSEK, setco2dataValueSEK] = useState(0);
   async function fetchPortfolio() {
     const res = await fetch("api/portfolio/iexbase");
     let data = await res.json();
