@@ -50,11 +50,15 @@ function transactions(
 }
 
 function MyAccount() {
-  let [co2dataValueSEK, setco2dataValueSEK] = useState(0);
+  let [co2dataValueSEK, setCo2dataValueSEK] = useState(0);
   async function fetchPortfolio() {
     const res = await fetch("api/portfolio/iexbase");
-    let data = await res.json();
-    setco2dataValueSEK(data[1].co2KgPerSEK);
+    if (res.status != 200) {
+      setCo2dataValueSEK(0);
+    } else {
+      let data = await res.json();
+      setCo2dataValueSEK(data[1].co2KgPerSEK);
+    }
   }
   useEffect(() => {
     fetchPortfolio();
