@@ -109,7 +109,7 @@ function TransactionContainer(props: Props) {
                     </time>
 
                     <span className="text-[#52B390] text-sm lg:text-base md:text-base">
-                      {trans.CO2.toFixed(2)} kg
+                      {trans.CO2.toFixed(3)} kg
                     </span>
                     <div className="flex flex-col mr-8">
                       <span className="text-sm lg:text-base md:text-base text-[#262626]">

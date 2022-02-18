@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import BalanceContainer from "../components/myAccountContainerComps/BalanceContainer";
 import RedeemContainer from "../components/myAccountContainerComps/RedeemContainer";
 import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
@@ -33,7 +33,8 @@ function sumOfNegativeTransactions(
 
 function transactions(
   currentMonth: number,
-  transactionsForDisplay: Transaction[]
+  transactionsForDisplay: Transaction[],
+  co2valueSEK: number
 ) {
   return negativeTransactionFromMonth(
     currentMonth,
@@ -44,14 +45,28 @@ function transactions(
     seller: t.descriptions.display,
     date: t.dates.booked,
     investment: amountHandler(t, 0.01, -1),
-    CO2: amountHandler(t, 0.005, -1),
+    CO2: amountHandler(t, co2valueSEK, -1),
   }));
 }
 
 function MyAccount() {
+  let [co2dataValueSEK, setCo2dataValueSEK] = useState(0);
+  async function fetchPortfolio() {
+    const res = await fetch("api/portfolio/iexbase");
+    if (res.status != 200) {
+      setCo2dataValueSEK(0);
+    } else {
+      let data = await res.json();
+      setCo2dataValueSEK(data[1].co2KgPerSEK);
+    }
+  }
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+
   const { data, isLoading, error } = useTransactions();
   let [savings, setSavings] = useState(0);
-
+  let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
   if (data?.transactions === undefined || data?.transactions.length === 0) {
     return (
       <div className="h-full my-44 justify-center flex flex-col items-center">
@@ -65,7 +80,7 @@ function MyAccount() {
   }
 
   let transactionsForDisplay = data?.transactions;
-  let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
+
   const availableMonths = [
     ...Array.from(
       new Set(
@@ -79,7 +94,7 @@ function MyAccount() {
 
   return (
     <Fragment>
-      <BalanceContainer value={savings} />
+      <BalanceContainer value={savings} CO2perSEK={co2dataValueSEK} />
 
       <h1 className="text-xl font-semibold font-display lg:mr-80 md:mr-10 border-b">
         Transfer to your savings
@@ -89,17 +104,22 @@ function MyAccount() {
         <TransferContainer
           key={month}
           sumOfTrans={sumOfNegativeTransactionsByMonth[currentMonth - month]}
-          currentMonth={month.toString()}
+          currentMonth={(currentMonth + month).toString()}
           updateSavings={setSavings}
           value={
             savings +
             sumOfNegativeTransactionsByMonth[currentMonth - month] * 0.01 * -1
           }
+          co2perSEK={co2dataValueSEK}
         />
       ))}
 
       <TransactionContainer
-        transactions={transactions(currentMonth, transactionsForDisplay)}
+        transactions={transactions(
+          currentMonth,
+          transactionsForDisplay,
+          co2dataValueSEK / 100
+        )}
         loading={isLoading}
       />
       <RedeemContainer value={savings} />
