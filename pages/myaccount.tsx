@@ -64,8 +64,9 @@ function MyAccount() {
     fetchPortfolio();
   }, []);
 
-  const { data, isLoading, error } = useTransactions();
+  const { data, isLoading } = useTransactions({ pageSize: 100 });
   let [savings, setSavings] = useState(0);
+
   let currentMonth = dayjs(data?.transactions[0].dates.booked).month();
   if (data?.transactions === undefined || data?.transactions.length === 0) {
     return (
