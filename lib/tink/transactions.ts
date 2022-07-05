@@ -1,9 +1,16 @@
 import TinkClient from "./tinkClient";
 
 export async function fetchTransactions(
-  accessToken: string
+  accessToken: string,
+  options: { pageSize: number; pageToken?: string }
 ): Promise<ListTransactionsResponse> {
-  return TinkClient.client.get("/data/v2/transactions", {
+  const params = new URLSearchParams();
+  params.set("pageSize", options.pageSize.toString(10));
+  if (options.pageToken) {
+    params.set("pageToken", options.pageToken);
+  }
+  const endpoint = "/data/v2/transactions?" + params.toString();
+  return TinkClient.client.get(endpoint, {
     headers: {
       authorization: `Bearer ${accessToken}`,
     },

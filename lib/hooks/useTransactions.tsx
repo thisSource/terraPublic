@@ -1,7 +1,18 @@
 import { useQuery } from "react-query";
 import { ListTransactionsResponse } from "../tink/transactions";
 
-async function fetchTransactions() {
+type Options = {
+  pageSize: number;
+  pageToken?: string;
+};
+
+async function fetchTransactions({ pageSize, pageToken }: Options) {
+  const url = new URLSearchParams();
+  url.set("pageSize", pageSize.toString(10));
+  if (pageToken) {
+    url.set("pageToken", pageToken);
+  }
+
   const resp = await fetch("/api/transactions");
   if (!resp.ok) {
     if (resp.status === 401) {
@@ -13,9 +24,10 @@ async function fetchTransactions() {
   }
   return await resp.json();
 }
-export function useTransactions() {
+
+export function useTransactions(options: Options) {
   return useQuery<any, String, ListTransactionsResponse>(
-    "transactions",
-    fetchTransactions
+    ["transactions", options],
+    () => fetchTransactions(options)
   );
 }
