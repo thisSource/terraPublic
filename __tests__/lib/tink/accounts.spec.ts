@@ -1,9 +1,6 @@
 import fetchAccounts from "../../../lib/tink/accounts";
 import TinkClient from "../../../lib/tink/tinkClient";
-jest.mock("../../../lib/tink/tinkClient", () => {
-  const mockGet = jest.fn();
-  return { client: { get: mockGet }, get: mockGet };
-});
+
 jest.mock("../../../config", () => ({
   __esModule: true,
   default: {
@@ -14,8 +11,24 @@ jest.mock("../../../config", () => ({
     },
   },
 }));
-const MockTinkClient = TinkClient as jest.MockedClass<any>;
 
+describe("api/accounts", function () {
+  it("fetch accounts", async () => {
+    const MockTinkClient = TinkClient as jest.MockedClass<typeof TinkClient>;
+    const spy = jest
+      .spyOn(MockTinkClient.client, "get")
+      .mockResolvedValue(stubAccountsResponse);
+
+    const accessToken = "fight_club";
+    const accountsResponse = await fetchAccounts(accessToken);
+    expect(spy).toHaveBeenCalledWith("/data/v2/accounts", {
+      headers: { authorization: "Bearer fight_club" },
+    });
+    expect(accountsResponse.accounts[0].id).toEqual(
+      "ee7ddbd178494220bb184791783f4f63"
+    );
+  });
+});
 const stubAccountsResponse = {
   accounts: [
     {
@@ -54,20 +67,3 @@ const stubAccountsResponse = {
   ],
   nextPageToken: "string",
 };
-
-describe("api/accounts", function () {
-  it("fetch accounts", async () => {
-    const spy = jest
-      .spyOn(MockTinkClient, "get")
-      .mockResolvedValue(stubAccountsResponse);
-
-    const accessToken = "fight_club";
-    const accountsResponse = await fetchAccounts(accessToken);
-    expect(spy).toHaveBeenCalledWith("/data/v2/accounts", {
-      headers: { authorization: "Bearer fight_club" },
-    });
-    expect(accountsResponse.accounts[0].id).toEqual(
-      "ee7ddbd178494220bb184791783f4f63"
-    );
-  });
-});

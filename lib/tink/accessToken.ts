@@ -69,7 +69,6 @@ export default async function fetchAccessToken(
   }
 
   const getAuthTokenPath = "/api/v1/oauth/token";
-  console.log(payload);
   const response = await TinkClient.client.post(getAuthTokenPath, {
     body: new URLSearchParams(payload),
   });

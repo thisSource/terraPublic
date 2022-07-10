@@ -10,7 +10,6 @@ export default withSession<ApiHandler>(async function (req, res) {
       const payload = await fetchCredentials(tokens.access_token);
       res.json(payload);
     } catch (e) {
-      console.log(e);
       if (e instanceof ClientError) {
         res.status(e.code).json({ error: e.message });
       }
