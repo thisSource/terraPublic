@@ -8,6 +8,7 @@ import Link from "next/link";
 import TransferContainer from "../components/myAccountContainerComps/TransferContainer";
 import { Transaction } from "../lib/tink/transactions";
 import { amountHandler } from "../lib/helpers";
+import { useSearch } from "../lib/hooks/useTransactionSearch";
 
 function negativeTransactionFromMonth(
   targetMonth: number,
@@ -65,6 +66,8 @@ function MyAccount() {
   }, []);
 
   const { data, isLoading } = useTransactions({ pageSize: 100 });
+  const r = useSearch();
+  console.log("search results", r.data);
   let [savings, setSavings] = useState(0);
 
   let currentMonth = dayjs(data?.transactions[0].dates.booked).month();

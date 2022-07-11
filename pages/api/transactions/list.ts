@@ -1,7 +1,7 @@
-import { ClientError } from "../../lib/tink/tinkClient";
-import { fetchTransactions } from "../../lib/tink/transactions";
-import withSession, { ApiHandler } from "../../lib/withSession";
-import { UserAuthTokens } from "../callback";
+import { ClientError } from "../../../lib/tink/tinkClient";
+import { fetchTransactions } from "../../../lib/tink/transactions";
+import withSession, { ApiHandler } from "../../../lib/withSession";
+import { UserAuthTokens } from "../../callback";
 
 const firstOrDefault = (value: string | string[]) => {
   return value instanceof Array ? value[0] : value;

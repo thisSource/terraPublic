@@ -13,7 +13,7 @@ async function fetchTransactions({ pageSize, pageToken }: Options) {
     url.set("pageToken", pageToken);
   }
 
-  const resp = await fetch("/api/transactions");
+  const resp = await fetch("/api/transactions/list");
   if (!resp.ok) {
     if (resp.status === 401) {
       // if auth denied, lets try the login endpoint
