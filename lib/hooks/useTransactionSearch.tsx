@@ -18,8 +18,8 @@ async function search(options: SearchQuery = {}) {
   return await resp.json();
 }
 
-export function useSearch(options: SearchQuery = {}) {
-  return useQuery<any, String, SearchResponse>(
+export function useSearch(options: SearchQuery = {limit:100, minAmount: -5000, maxAmount: -1}) {
+  return useQuery<any, String, SearchResponse>(   
     ["transactions", "search", options],
     () => search(options)
   );

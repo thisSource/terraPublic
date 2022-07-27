@@ -1,7 +1,7 @@
-function Video() {
+function Video(props:string) {
   return (
-    <video width={600} height={600} autoPlay loop muted>
-      <source src="landing/sky.mp4" />
+    <video width={600} height={700} autoPlay loop muted>
+      <source src={props} />
     </video>
   );
 }

@@ -1,132 +1,108 @@
-import Link from "next/link";
-import { formatDate } from "../../lib/helpers";
+import { useSearch } from "../../lib/hooks/useTransactionSearch";
+import { formatTimeStamp } from "../../lib/helpers";
 
 function formatAmount(amount: number) {
   return new Intl.NumberFormat("sv-SE", {
     style: "currency",
     currency: "SEK",
-    currencyDisplay: "narrowSymbol",
+    currencyDisplay: "narrowSymbol"
   }).format(amount);
 }
 
-type Transaction = {
-  id: string;
-  date: string;
-  seller: string;
-  amount: number;
-  investment: number;
-  CO2: number;
-};
-
 type Props = {
-  transactions?: Transaction[];
-  loading: boolean;
+  co2perSEK?: number;
 };
-
-function Loading() {
-  return (
-    <div className="rounded-md">
-      <div className="flex sm:max-w-xl w-full justify-between animate-pulse flex-row h-full space-x-5">
-        <div className="flex flex-col space-y-3">
-          <div className="w-36 bg-gray-300 h-6 rounded-md"></div>
-          <div className="w-24 bg-gray-300 h-6 rounded-md"></div>
-        </div>
-        <div className="flex flex-col space-y-3">
-          <div className="w-20 bg-gray-300 h-6 rounded-md"></div>
-          <div className="w-12 bg-gray-300 h-6 rounded-md self-end"></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function EmptyState() {
-  return <p className="text-3xl">No transactions found</p>;
-}
 
 function TransactionContainer(props: Props) {
-  if (
-    !props.loading &&
-    (!props.transactions || props.transactions.length <= 0)
-  ) {
-    return (
-      <div className="h-full my-44 flex justify-center flex-col items-center">
-        <EmptyState />
-        <Link href="/login">
-          <a className="underline cursor-pointer text-yellow-700">
-            Choose another account
-          </a>
-        </Link>
-      </div>
-    );
-  }
+  let { data, isLoading } = useSearch();
+
   return (
-    <div className="py-3 lg:mr-80 md:mr-10">
-      <div className="flex items-center space-x-4 border-b">
-        <h1 className="text-xl font-bold font-display">Transactions</h1>
-        <Link href="/login">
-          <a className="text-xs underline cursor-pointer text-yellow-700">
-            Refresh
-          </a>
-        </Link>
+    <div className="mt-20">
+      <div className="sm:flex sm:items-center">
+        <div className="sm:flex-auto">
+          <h1 className="text-xl font-semibold text-gray-900">Transactions</h1>
+          <p className="mt-2 text-sm text-gray-700">
+            A list of your 100 latest transactions
+          </p>
+        </div>
       </div>
+      <div className="mx-1 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg overflow-y-scroll h-96">
+        <table className="min-w-full divide-y divide-gray-300">
+          <thead className="bg-gray-100">
+            <tr>
+              <th
+                scope="col"
+                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+              >
+                Seller
+              </th>
+              <th
+                scope="col"
+                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
+              >
+                Date
+              </th>
+              <th
+                scope="col"
+                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+              >
+                Amount
+              </th>
+              <th
+                scope="col"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                Investment
+              </th>
 
-      {props.loading ? (
-        <div className="flex flex-col space-y-6 mt-8">
-          <Loading />
-          <Loading />
-          <Loading />
-          <Loading />
-        </div>
-      ) : (
-        <div className="">
-          <div className="flex flex-row justify-between py-2">
-            <span className="text-sm lg:text-base md:text-base font-semibold">
-              Seller
-            </span>
-            <span className="text-sm lg:text-base md:text-base font-semibold ml-20">
-              CO2 removed
-            </span>
-            <div className="flex flex-col mr-8">
-              <span className="text-sm lg:text-base md:text-base font-semibold">
-                Transaction /
-              </span>
-              <span className="text-sm lg:text-base md:text-base font-semibold">
-                1 % To savings
-              </span>
-            </div>
-          </div>
-          <div className="h-80 overflow-x-auto">
-            {props.transactions?.map((trans) => {
-              return (
-                <div key={trans.id} className="bg-white">
-                  <span className="text-sm lg:text-base md:text-base">
-                    {trans.seller}
-                  </span>
-                  <div className="flex flex-row justify-between">
-                    <time className="text-[#AEC0C6] text-sm">
-                      {formatDate(trans.date)}
-                    </time>
-
-                    <span className="text-[#52B390] text-sm lg:text-base md:text-base">
-                      {trans.CO2.toFixed(3)} kg
-                    </span>
-                    <div className="flex flex-col mr-8">
-                      <span className="text-sm lg:text-base md:text-base text-[#262626]">
-                        {formatAmount(trans.amount)}
-                      </span>
-                      <span className="text-[#52B390] text-sm lg:text-base md:text-base text-right">
-                        {formatAmount(trans.investment)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+              <th
+                scope="col"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                CO2 (kg)
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200 bg-white">
+            {data?.results.map((trans) => (
+              <tr key={trans.transaction.id}>
+                <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-terra-purple-600 sm:w-auto sm:max-w-none sm:pl-6">
+                  {trans.transaction.description}
+                  <dl className="font-normal lg:hidden">
+                    <dt className="sr-only">Amount</dt>
+                    <dt className="sr-only sm:hidden">Amount</dt>
+                    <dd className="mt-1 truncate text-gray-500 sm:hidden">
+                      {formatTimeStamp(trans.transaction.date)}
+                    </dd>
+                    <dd className="mt-1 truncate text-base font-semibold text-gray-500 sm:hidden">
+                      {formatAmount(trans.transaction.amount)}
+                    </dd>
+                  </dl>
+                </td>
+                <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                  {formatTimeStamp(trans.transaction.date)}
+                </td>
+                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                  {formatAmount(trans.transaction.amount)}
+                </td>
+                <td className="px-3 py-4 text-sm text-gray-500">
+                  {formatAmount(trans.transaction.amount * 0.01 * -1)}
+                </td>
+                <td className="px-3 py-4 text-sm text-gray-500">
+                  {(
+                    trans.transaction.amount *
+                    0.01 *
+                    props.co2perSEK *
+                    -1
+                  ).toFixed(2)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
+
 export default TransactionContainer;
