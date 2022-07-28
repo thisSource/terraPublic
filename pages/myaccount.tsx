@@ -1,73 +1,29 @@
-import React, { Fragment, useEffect, useState } from "react";
-import BalanceContainer from "../components/myAccountContainerComps/BalanceContainer";
-import RedeemContainer from "../components/myAccountContainerComps/RedeemContainer";
-import TransactionContainer from "../components/myAccountContainerComps/TransactionContainer";
-import Link from "next/link";
-import { useSearch } from "../lib/hooks/useTransactionSearch";
-import TransferContainer from "../components/myAccountContainerComps/TransferContainer";
-import SavingOptionSelect from "../components/saveOptions/SaveOptionSelect";
+import Account from "../components/myAccountContainerComps/Account";
+import { useEffect, useState } from "react";
+import SavingOptionSelect from "../components/myAccountContainerComps/SaveOptionSelect";
 
 function MyAccount() {
-  let { data, isLoading } = useSearch();
-  let [savings, setSavings] = useState(0);
-  let [co2dataValueSEK, setCo2dataValueSEK] = useState(0);
+  const [isAccount, setIsAccount] = useState(true);
+  const [page, setPage] = useState(<Account />);
 
-  async function fetchPortfolio() {
-    const res = await fetch("api/portfolio/iexbase");
-    if (res.status != 200) {
-      setCo2dataValueSEK(0);
-    } else {
-      let data = await res.json();
-      setCo2dataValueSEK(data[1].co2KgPerSEK);
-    }
-  }
   useEffect(() => {
-    fetchPortfolio();
-  }, []);
-
-  if (data?.periodAmounts === undefined || data?.periodAmounts.length === 0) {
-    return (
-      <div className="h-full my-44 justify-center flex flex-col items-center">
-        <Link href="/login">
-          <a className="underline cursor-pointer text-yellow-700">
-            Please login to view your transactions
-          </a>
-        </Link>
-      </div>
-    );
-  }
-
-  const monthsForDisplay = [...data?.periodAmounts].reverse();
+    isAccount ? setPage(<Account />) : setPage(<SavingOptionSelect />);
+  },[isAccount]);
 
   return (
     <div className="lg:mx-72 md:mx-20 mt-10">
-      <BalanceContainer value={savings} CO2perSEK={co2dataValueSEK} />
-      <div className="mt-20">
-        <h1 className="text-xl font-semibold text-gray-900">
-          {" "}
-          Transfered to your savings
-        </h1>
-        {/* <div className="overflow-y-scroll h-96"> */}
-        <div className="overflow-y-scroll scroll-smooth h-96">
-
-          {monthsForDisplay.map((month) => (
-            <TransferContainer
-              key={month.key}
-              sumOfTrans={month.value}
-              currentMonth={month.key}
-              updateSavings={setSavings}
-              value={savings + month.value * 0.01 * -1}
-              co2perSEK={co2dataValueSEK}
-            />
-          ))}
-        </div>
-        <TransactionContainer co2perSEK={co2dataValueSEK} />
+      <div className="mb-10 border-b border-gray-300 text-lg">
+        <button
+          className="border-terra-purple-600 text-terra-purple-600 w-1/4 py-4 px-1 text-center border-b-2 font-medium"
+          onClick={() => setIsAccount(true)}
+        >
+          Account
+        </button>
+        <button className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium" onClick={() => setIsAccount(false)}>
+          Saving Options
+        </button>
       </div>
-
-      <div className="mt-10">
-        <SavingOptionSelect />
-      </div>
-      <RedeemContainer value={savings} />
+      {page}
     </div>
   );
 }
