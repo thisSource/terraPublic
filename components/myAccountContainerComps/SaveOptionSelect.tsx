@@ -1,8 +1,4 @@
-import {
-  CalendarIcon,
-  LocationMarkerIcon,
-  UsersIcon,
-} from "@heroicons/react/solid";
+import { UsersIcon } from "@heroicons/react/solid";
 
 const services = [
   {
