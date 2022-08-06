@@ -1,5 +1,3 @@
-import { ChevronRightIcon } from "@heroicons/react/solid";
-
 export default function LoginSignup() {
   return (
     <main className="mt-16 p-8 sm:mt-24 bg-gray-100 rounded">
@@ -7,19 +5,6 @@ export default function LoginSignup() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="px-4 sm:px-6 sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left lg:flex lg:items-center">
             <div>
-              {/* <a
-                href="#"
-                className="inline-flex items-center text-white bg-gray-900 rounded-full p-1 pr-2 sm:text-base lg:text-sm xl:text-base hover:text-gray-200"
-              >
-                <span className="px-3 py-0.5 text-white text-xs font-semibold leading-5 uppercase tracking-wide bg-indigo-500 rounded-full">
-                  Transactions and investment
-                </span>
-                <span className="ml-4 text-sm">Learn more</span>
-                <ChevronRightIcon
-                  className="ml-2 w-5 h-5 text-gray-500"
-                  aria-hidden="true"
-                />
-              </a> */}
               <h1 className="mt-4 text-xl tracking-tight font-semibold text-gray-700 sm:mt-5 sm:leading-none lg:mt-6 lg:text-xl xl:text-xl">
                 <span className="md:block">Join the community</span>{" "}
               </h1>

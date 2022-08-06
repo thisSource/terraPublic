@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import LogoNavbarText from "../public/logos/terra/studioAsset 8.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -28,31 +29,26 @@ export default function Navbar() {
                   </a>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
-                    href="/fund"
-                    className="border-transparent text-black hover:border-gray-300 hover:text-gray-700  inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium"
-                  >
-                    Terra Fund 
-                  </a>
-                  <a
-                    href="/savingoptions"
-                    className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium"
-                  >
-                    Saving Options
-                  </a>
-                  <a
-                    href="/how"
-                    className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium"
-                  > 
-                    How it works
-                  </a>
-                  <a
-                    href="/fund"
-                    className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium"
-                  >
-                    Articles
-                  </a>
+                  <Link href="/fund">
+                    <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700  inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
+                      Terra Fund
+                    </a>
+                  </Link>
+                  <Link href="/savingoptions">
+                    <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
+                      Saving Options
+                    </a>
+                  </Link>
+                  <Link href="/how">
+                    <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
+                      How it works
+                    </a>
+                  </Link>
+                  <Link href="/fund">
+                    <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
+                      Articles
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -69,11 +65,9 @@ export default function Navbar() {
                   <div>
                     <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      <a className="p-2.5 px-8 py-2 text-base rounded-full bg-terra-green-300 text-gray-700 font-semibold hover:bg-indigo-300 hover:text-gray-700 transition cursor-pointer">
+                        Account
+                      </a>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -142,24 +136,23 @@ export default function Navbar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="pt-2 pb-3 space-y-1">
-              {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
               <Disclosure.Button
                 as="a"
                 href="/fund"
                 className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
               >
-                Fund
+                Terra Fund
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="/campagin"
+                href="/savingoptions"
                 className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
               >
-                Campaigns
+                Saving Options
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="#"
+                href="/how"
                 className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
               >
                 How it works

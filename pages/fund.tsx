@@ -44,9 +44,11 @@ const portfolio = [
 
 function Fund() {
   return (
-    <div className="mt-8">
+    <div className="mt-8 mx-8">
       <ContainerDevelopmentCard />
-      <h3 className="mt-20 text-lg leading-6 font-medium text-gray-900">Portfolio</h3>
+      <h3 className="mt-20 text-lg leading-6 font-medium text-gray-900">
+        Portfolio
+      </h3>
       <div className="grid lg:grid-cols-3 gap-10 mt-10">
         {portfolio.map((company) => (
           <CompanyCard

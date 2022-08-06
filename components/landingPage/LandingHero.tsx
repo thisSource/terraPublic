@@ -19,7 +19,7 @@ export default function LandingHero() {
         <div className="my-10">
           <Link href="/welcome" passHref>
             <a className="p-2.5 px-8 py-4 rounded-full text-base bg-gray-300 text-gray-700 font-semibold hover:bg-indigo-300 hover:text-gray-700 transition cursor-pointer">
-              join Sauron.
+              Join Terra today
             </a>
           </Link>
         </div>
@@ -27,4 +27,3 @@ export default function LandingHero() {
     </div>
   );
 }
-  

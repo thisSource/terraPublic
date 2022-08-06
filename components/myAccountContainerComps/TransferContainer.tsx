@@ -1,8 +1,3 @@
-import {
-  CheckCircleIcon,
-  ChevronRightIcon,
-  MailIcon
-} from "@heroicons/react/solid";
 import { useState } from "react";
 import { formatAmount, formatMonth } from "../../lib/helpers";
 
@@ -20,21 +15,21 @@ const transButton = {
   completedButtonStyle:
     "px-5 py-4 mt-10 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed",
   transferButtonText: "Transfer to savings",
-  completedButtonText: "Transfer Completed"
+  completedButtonText: "Transfer Completed",
 };
 
 export default function TransferContainer2(props: Props) {
   let [transferred, setTransferred] = useState(false);
   let [buttonStyle, setButtonStyle] = useState({
     style: transButton.transferButtonStyle,
-    text: transButton.transferButtonText
+    text: transButton.transferButtonText,
   });
 
   function transferSavings() {
     transferred ? setTransferred(false) : setTransferred(true);
     setButtonStyle({
       style: transButton.completedButtonStyle,
-      text: transButton.completedButtonText
+      text: transButton.completedButtonText,
     });
     props.updateSavings(props.value);
   }

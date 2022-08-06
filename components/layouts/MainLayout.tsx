@@ -8,7 +8,7 @@ function MainLayout(props: { children: ReactNode }) {
     <div>
       <Headbar />
       <Navbar />
-      <main className="mx-8">{props.children}</main>
+      <main className="">{props.children}</main>
       <Footer />
     </div>
   );

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import BalanceContainer from "../myAccountContainerComps/BalanceContainer";
-import RedeemContainer from "../myAccountContainerComps/RedeemContainer";
 import TransactionContainer from "../myAccountContainerComps/TransactionContainer";
 import Link from "next/link";
 import { useSearch } from "../../lib/hooks/useTransactionSearch";
 import TransferContainer from "../myAccountContainerComps/TransferContainer";
-import SavingOptionSelect from "./SaveOptionSelect";
 
 function Account() {
   let { data, isLoading } = useSearch();
@@ -41,15 +39,17 @@ function Account() {
 
   return (
     <div className="">
-      <BalanceContainer value={savings} CO2perSEK={co2dataValueSEK} />
+      <BalanceContainer
+        value={savings}
+        CO2perSEK={co2dataValueSEK}
+        currentTransfer={monthsForDisplay[0].value}
+      />
       <div className="mt-20">
         <h1 className="text-xl font-semibold text-gray-900">
           {" "}
           Transfered to your savings
         </h1>
-        {/* <div className="overflow-y-scroll h-96"> */}
         <div className="overflow-y-scroll scroll-smooth h-96">
-
           {monthsForDisplay.map((month) => (
             <TransferContainer
               key={month.key}
@@ -63,11 +63,6 @@ function Account() {
         </div>
         <TransactionContainer co2perSEK={co2dataValueSEK} />
       </div>
-
-      <div className="mt-10">
-        <SavingOptionSelect />
-      </div>
-      <RedeemContainer value={savings} />
     </div>
   );
 }

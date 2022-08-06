@@ -5,12 +5,12 @@ function formatAmount(amount: number) {
   return new Intl.NumberFormat("sv-SE", {
     style: "currency",
     currency: "SEK",
-    currencyDisplay: "narrowSymbol"
+    currencyDisplay: "narrowSymbol",
   }).format(amount);
 }
 
 type Props = {
-  co2perSEK?: number;
+  co2perSEK: number;
 };
 
 function TransactionContainer(props: Props) {
@@ -22,7 +22,7 @@ function TransactionContainer(props: Props) {
         <div className="sm:flex-auto">
           <h1 className="text-xl font-semibold text-gray-900">Transactions</h1>
           <p className="mt-2 text-sm text-gray-700">
-            A list of your 100 latest transactions
+            List of your 100 latest transactions
           </p>
         </div>
       </div>

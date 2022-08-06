@@ -3,7 +3,7 @@
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}"
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -19,7 +19,7 @@ module.exports = {
           600: "#4747B9",
           700: "#373791",
           800: "#272768",
-          900: "#18183F"
+          900: "#18183F",
         },
         "terra-green": {
           DEFAULT: "#89CEBA",
@@ -32,21 +32,21 @@ module.exports = {
           600: "#61BEA3",
           700: "#44A387",
           800: "#337B67",
-          900: "#235446"
+          900: "#235446",
         },
         terraDarkPink: "#DB98D7",
-        "terraPink": "#FF9BBD",
-        "terraDarkOrange": "#FFAD96",
-        "terraOrange": "#FFD074",
-        "terraYellow": "#F9F871"
+        terraPink: "#FF9BBD",
+        terraDarkOrange: "#FFAD96",
+        terraOrange: "#FFD074",
+        terraYellow: "#F9F871",
       },
       fontFamily: {
-        display: ["Secular One", "sans-serif"]
-      }
-    }
+        display: ["Secular One", "sans-serif"],
+      },
+    },
   },
   variants: {
-    extend: {}
+    extend: {},
   },
-  plugins: []
+  plugins: [],
 };

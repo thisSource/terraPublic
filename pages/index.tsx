@@ -3,7 +3,7 @@ import LandingHero from "../components/landingPage/LandingHero";
 
 function LandingPage() {
   return (
-    <div className="">
+    <div className="mx-8">
       {/* <OceanData /> */}
       <LandingHero />
       <LoginSignup />

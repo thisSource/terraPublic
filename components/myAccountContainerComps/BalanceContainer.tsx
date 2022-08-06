@@ -4,36 +4,36 @@ import { formatAmount } from "../../lib/helpers";
 interface Props {
   value: number;
   CO2perSEK: number;
+  currentTransfer: number;
 }
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function BalanceContainer2(props: Props) {
+export default function BalanceContainer(props: Props) {
   console.log(props);
   const stats = [
     {
       name: "Balance",
       stat: formatAmount(props.value),
-      previousStat: "0",
-      change: "12%",
-      changeType: "increase"
+      change: "",
+      changeType: "increase",
     },
     {
       name: "CO2 savings (Kg)",
       stat: (props.value * props.CO2perSEK).toFixed(1),
-      previousStat: "56.14",
-      change: "2.02",
-      changeType: "increase"
+      change: "",
+      changeType: "increase",
     },
     {
       name: "To be transfered",
-      stat: "248.80 kr",
-      previousStat: "28.62%",
-      change: "405.7",
-      changeType: "increase"
-    }
+      stat: formatAmount(props.currentTransfer * 0.01 * -1),
+      change:
+        (props.currentTransfer * 0.01 * -1 * props.CO2perSEK).toFixed(2) +
+        " kg",
+      changeType: "increase",
+    },
   ];
   return (
     <div>
@@ -45,7 +45,6 @@ export default function BalanceContainer2(props: Props) {
             <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
               <div className="flex items-baseline text-2xl font-semibold text-terra-purple-600">
                 {item.stat}
-                {/* <span className="ml-2 text-sm font-medium text-gray-500">from {item.previousStat}</span> */}
               </div>
 
               <div
