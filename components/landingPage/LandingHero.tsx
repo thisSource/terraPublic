@@ -5,11 +5,11 @@ import TerraGrid from "../p5components/TerraGrid";
 
 export default function LandingHero() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2">
-      <div className="m-4">
+    <div className="flex lg:flex-row flex-col justify-center items-center">
+      <div className="lg:mr-20">
         <TerraGrid />
       </div>
-      <div className="lg:mt-40 mt-10 lg:ml-10">
+      <div className="lg:mt-40 mt-10 lg:ml-10 lg:mr-40">
         <h1 className="text-gray-700 lg:text-3xl text-2xl font-semibold mr-4">
           We must join with Him, Gandalf. We must join with Sauron.
         </h1>

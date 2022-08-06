@@ -14,7 +14,7 @@ export default function Navbar() {
     <Disclosure as="nav" className="bg-gray-100 shadow">
       {({ open }) => (
         <>
-          <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-full mx-auto px-4 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex-shrink-0 flex items-center">
@@ -28,23 +28,23 @@ export default function Navbar() {
                     />
                   </Link>
                 </div>
-                <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  <Link href="/fund">
+                <div className="hidden sm:flex sm:space-x-8">
+                  <Link href="/fund" passHref>
                     <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700  inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
                       Terra Fund
                     </a>
                   </Link>
-                  <Link href="/savingoptions">
+                  <Link href="/savingoptions" passHref>
                     <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
                       Saving Options
                     </a>
                   </Link>
-                  <Link href="/how">
+                  <Link href="/how" passHref>
                     <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
                       How it works
                     </a>
                   </Link>
-                  <Link href="/fund">
+                  <Link href="/fund" passHref>
                     <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
                       Articles
                     </a>
@@ -63,7 +63,7 @@ export default function Navbar() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ring-terra-purple-300">
                       <span className="sr-only">Open user menu</span>
                       <a className="p-2.5 px-8 py-2 text-base rounded-full bg-terra-green-300 text-gray-700 font-semibold hover:bg-indigo-300 hover:text-gray-700 transition cursor-pointer">
                         Account
@@ -88,7 +88,7 @@ export default function Navbar() {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            <Link href="/myaccount">
+                            <Link href="/myaccount" passHref>
                               <a>Profile</a>
                             </Link>
                           </div>
@@ -102,7 +102,7 @@ export default function Navbar() {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            <Link href="/login">
+                            <Link href="/login" passHref>
                               <a>Sign in</a>
                             </Link>
                           </div>

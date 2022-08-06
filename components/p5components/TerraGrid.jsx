@@ -15,17 +15,21 @@ function TerraGrid(props) {
   let yPos;
 
   let squares = 15;
-  let sidelength = 22;
+  let sidelength = 18;
 
   const setup = (p5, canvasParentRef) => {
     p5.createCanvas(
-      squares * sidelength * 1.2,
+      squares * sidelength * 1,
       squares * sidelength * 1.2
+      // squares * sidelength * 1.2,
+      // squares * sidelength * 1.2
     ).parent(canvasParentRef);
     widthAdjustor = p5.width / orgWidth;
+    // widthAdjustor = 1
+
     let size = 30 / widthAdjustor;
     xPos = p5.width / 2;
-    yPos = p5.height / 3;
+    yPos = p5.height / 2;
 
     for (let i = 0; i < 3; i++) {
       let x = p5.random(p5.width / 2 - size, p5.width / 2 + size);
@@ -33,7 +37,7 @@ function TerraGrid(props) {
       let m = p5.random(10, 70);
       movers[i] = new Mover(p5, x, y, m, widthAdjustor);
     }
-    attractor = new Attractor(p5, p5.width / 2, p5.height / 2 + 100, 600);
+    attractor = new Attractor(p5, p5.width / 2, p5.height, 600);
   };
 
   const grid = (p5, colsA, rowsA, lengthA, bool) => {
@@ -81,8 +85,8 @@ function TerraGrid(props) {
 
     attract(p5, obj) {
       let force = window.p5.Vector.sub(this.pos, obj.pos);
-      let distanceSqr = p5.constrain(force.magSq(), 100, 900);
-      let G = 1;
+      let distanceSqr = p5.constrain(force.magSq(), 100, 200);
+      let G = 0.5;
       let strength = (G * (this.mass * obj.mass)) / distanceSqr;
       force.setMag(strength);
       obj.applyForce(force);
@@ -109,7 +113,7 @@ function TerraGrid(props) {
     }
 
     applyForce(force) {
-      let f = window.p5.Vector.div(force, this.mass + 500);
+      let f = window.p5.Vector.div(force, this.mass + 700);
       this.acc.add(f);
     }
     update(p5) {
