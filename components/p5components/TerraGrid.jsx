@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 // Will only import `react-p5` on client-side
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
-  ssr: false
+  ssr: false,
 });
 function TerraGrid(props) {
   let orgWidth = 1670 / 2;

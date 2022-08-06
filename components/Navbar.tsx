@@ -18,15 +18,15 @@ export default function Navbar() {
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex-shrink-0 flex items-center">
-                  <a href="/" className="mt-2">
+                  <Link href="/">
                     <Image
-                      className="block lg:hidden h-8 w-auto"
+                      className="block lg:hidden h-8 w-auto cursor-pointer"
                       src={LogoNavbarText}
                       width="200"
                       height="50"
                       alt="logo"
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   <Link href="/fund">
@@ -82,28 +82,30 @@ export default function Navbar() {
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="/myaccount"
+                          <div
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Profile
-                          </a>
+                            <Link href="/myaccount">
+                              <a>Profile</a>
+                            </Link>
+                          </div>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="/login"
+                          <div
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Sign in
-                          </a>
+                            <Link href="/login">
+                              <a>Sign in</a>
+                            </Link>
+                          </div>
                         )}
                       </Menu.Item>
                       {/* <Menu.Item>

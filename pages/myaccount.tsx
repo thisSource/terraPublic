@@ -34,7 +34,7 @@ function MyAccount() {
   }, [isAccount]);
 
   return (
-    <div className="lg:mx-72 md:mx-10 mt-10">
+    <div className="lg:mx-72 md:mx-10 mx-4 mt-10">
       <div className="flex flex-row justify-between mb-10 border-b border-gray-300 text-lg">
         <button
           className={accountStyle}
