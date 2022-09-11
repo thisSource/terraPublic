@@ -75,13 +75,6 @@ const portfolioCarbonCapture = [
     about:
       "Ballard Power is the leading global provider of innovative clean energy fuel cell solutions that offer superior performance at a reduced operating cost.",
   },
-  // {
-  //   id: "5",
-  //   company: "Banco Latinoamericano de Comercio Exterior",
-  //   offer: "Mix",
-  //   image: "/fundImages/blx.jpg",
-  //   about: "A leading independent renewable power producer in Latin America.",
-  // },
 ];
 
 function Fund() {

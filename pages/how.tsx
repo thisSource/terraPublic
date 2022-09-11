@@ -12,7 +12,7 @@ export default function Test() {
         </p>
         <p className="mb-40 lg:mb-20 text-4xl">and... </p>
       </div>
-      <div className="snap-center bg-terraDarkPink w-full flex-shrink-0  h-screen flex flex-col items-center justify-center">
+      <div className="snap-center bg-terra-darkpink w-full flex-shrink-0  h-screen flex flex-col items-center justify-center">
         <p className="m-20 px-20 lg:text-8xl text-6xl">
           By placing your money in{" "}
           <span className="text-terra-purple-700">
@@ -24,7 +24,7 @@ export default function Test() {
         </p>
         <p className="text-2xl">Building a better world</p>
       </div>
-      <div className="snap-center bg-terraPink w-full flex-shrink-0 h-screen flex flex-col items-center justify-center">
+      <div className="snap-center bg-terra-pink w-full flex-shrink-0 h-screen flex flex-col items-center justify-center">
         <p className="text-6xl lg:text-7xl m-20">
           {" "}
           Select from our
@@ -38,16 +38,16 @@ export default function Test() {
 
         <p className="text-xl">To create the perfect saving balance.</p>
       </div>
-      <div className="snap-center bg-terraDarkOrange w-full flex-shrink-0 h-screen flex items-center justify-center">
+      <div className="snap-center bg-terra-darkorange w-full flex-shrink-0 h-screen flex items-center justify-center">
         <p className="text-8xl m-20">And watch your funds grow</p>
       </div>
-      <div className="snap-center bg-terraOrange w-full flex-shrink-0 h-screen flex flex-col items-center justify-center">
+      <div className="snap-center bg-terra-orange w-full flex-shrink-0 h-screen flex flex-col items-center justify-center">
         <p className="text-2xl m-10">transaction by transaction</p>
         <p className="text-4xl m-10">
           making the planet greener, smarter and sweeter
         </p>
       </div>
-      <div className="snap-center bg-terraYellow w-full flex-shrink-0 h-screen flex flex-col items-center justify-center text-8xl">
+      <div className="snap-center bg-terra-yellow w-full flex-shrink-0 h-screen flex flex-col items-center justify-center text-8xl">
         <p className="text-xl">Sounds interesting?</p>
         <div className="">
           <Link href="/welcome" passHref>

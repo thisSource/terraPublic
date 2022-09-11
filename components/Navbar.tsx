@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import LogoNavbarText from "../public/logos/terra/studioAsset 8.svg";
+import LogoNavbarText from "../public/logos/terra/studioAsset 8.png";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,13 +22,13 @@ export default function Navbar() {
                     <Image
                       className="block lg:hidden h-8 w-auto cursor-pointer"
                       src={LogoNavbarText}
-                      width="200"
+                      width="150"
                       height="50"
                       alt="logo"
                     />
                   </Link>
                 </div>
-                <div className="hidden sm:flex sm:space-x-8">
+                <div className="hidden sm:flex sm:space-x-8 ml-10">
                   <Link href="/fund" passHref>
                     <a className="border-transparent text-black hover:border-gray-300 hover:text-gray-700  inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium">
                       Terra Fund
@@ -108,16 +108,6 @@ export default function Navbar() {
                           </div>
                         )}
                       </Menu.Item>
-                      {/* <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item> */}
                     </Menu.Items>
                   </Transition>
                 </Menu>

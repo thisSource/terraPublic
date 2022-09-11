@@ -12,7 +12,6 @@ function classNames(...classes: any) {
 }
 
 export default function BalanceContainer(props: Props) {
-  console.log(props);
   const stats = [
     {
       name: "Balance",

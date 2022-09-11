@@ -7,6 +7,7 @@ import TransferContainer from "../myAccountContainerComps/TransferContainer";
 
 function Account() {
   let { data, isLoading } = useSearch();
+  console.log(data);
   let [savings, setSavings] = useState(0);
   let [co2dataValueSEK, setCo2dataValueSEK] = useState(0);
 

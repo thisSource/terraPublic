@@ -1,6 +1,4 @@
-// import Image from "next/dist/client/image";
 import Link from "next/link";
-// import Video from "./Video";
 import TerraGrid from "../p5components/TerraGrid";
 
 export default function LandingHero() {
