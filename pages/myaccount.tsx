@@ -38,6 +38,7 @@ function MyAccount() {
       <div className="flex flex-row justify-between mb-10 text-lg">
         {sectionNames.map((section) => (
           <button
+            key={section}
             className={styles[section as keyof Style] || styles.default}
             onClick={() => setActiveSection(section)}
           >
