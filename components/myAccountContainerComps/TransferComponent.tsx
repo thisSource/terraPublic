@@ -4,7 +4,7 @@ interface Props {
   value: number;
 }
 
-function RedeemContainer(savings: Props) {
+function TransferComponent(savings: Props) {
   return (
     <div className="py-4 mt-20 lg:mr-1 md:mr-10 mb-10 ">
       <h1 className="text-xl font-semibold text-gray-900">
@@ -28,4 +28,4 @@ function RedeemContainer(savings: Props) {
   );
 }
 
-export default RedeemContainer;
+export default TransferComponent;

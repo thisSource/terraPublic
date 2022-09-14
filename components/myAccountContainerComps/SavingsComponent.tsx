@@ -42,7 +42,7 @@ const services = [
   },
 ];
 
-export default function SavingOptionSelect() {
+export default function SavingsComponent() {
   return (
     <div className="">
       <h1 className="text-xl font-semibold text-gray-900"> Saving options</h1>

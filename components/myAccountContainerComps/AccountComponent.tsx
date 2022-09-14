@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import BalanceContainer from "../myAccountContainerComps/BalanceContainer";
-import TransactionContainer from "../myAccountContainerComps/TransactionContainer";
+import BalanceContainer from "./BalanceContainer";
+import TransactionContainer from "./TransactionContainer";
 import Link from "next/link";
 import { useSearch } from "../../lib/hooks/useTransactionSearch";
-import TransferContainer from "../myAccountContainerComps/TransferContainer";
+import TransferContainer from "./TransferContainer";
 
-function Account() {
+function AccountComponent() {
   let { data, isLoading } = useSearch();
-  console.log(data);
+  // console.log(data);
   let [savings, setSavings] = useState(0);
   let [co2dataValueSEK, setCo2dataValueSEK] = useState(0);
 
@@ -68,4 +68,4 @@ function Account() {
   );
 }
 
-export default Account;
+export default AccountComponent;
