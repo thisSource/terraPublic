@@ -3,8 +3,6 @@ import AccountComponent from "../components/myAccountContainerComps/AccountCompo
 import SavingsComponent from "../components/myAccountContainerComps/SavingsComponent";
 import TransferComponent from "../components/myAccountContainerComps/TransferComponent";
 
-import * as React from "react";
-
 interface Comps {
   account: React.ElementType;
   savings: React.ElementType;
