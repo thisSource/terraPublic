@@ -1,7 +1,7 @@
 import CompanyCard from "../components/fundContainerComps/BaseCompanyCard";
 import ContainerDevelopmentCard from "../components/fundContainerComps/ContainerDevelopmentCard";
 
-const portfolio = [
+const portfolioEnergy = [
   {
     id: "1",
     company: "Clearway Energy Inc",
@@ -42,27 +42,67 @@ const portfolio = [
   },
 ];
 
+const portfolioCarbonCapture = [
+  {
+    id: "1",
+    company: "Aker carbon capture AS",
+    offer: "Carbon capture",
+    image: "/fundImages/aker.jpg",
+    about:
+      "Aker Carbon Capture’s market-leading technology is validated by an extensive track-record and long-term operations at industrial scale. Aker Carbon Capture technology is cost-effective, robust and flexible, and it can be applied to existing plants or new builds. Our process technology has more than 50,000 operating hours and is certified by DNV GL for multiple applications.",
+  },
+  {
+    id: "2",
+    company: "Fuel cell energy",
+    offer: "Fuel cells and carbon recyceling",
+    image: "/fundImages/fuelenergy.jpg",
+    about:
+      "FuelCell Energy, Inc. (NASDAQ: FCEL) is a global leader in fuel cell technology with a purpose of utilizing its proprietary, state-of-the-art fuel cell platforms to enable a world empowered by clean energy.",
+  },
+  {
+    id: "3",
+    company: "Bloomenergy",
+    offer: "Fuel cells and carbon recyceling",
+    image: "/fundImages/bloom.jpg",
+    about:
+      "Powering our planet with resilient, sustainable, and predictable energy is the defining challenge of our time. Bloom empowers businesses and communities to take charge of their future with abundant, clean energy without compromises.",
+  },
+  {
+    id: "4",
+    company: "Ballard",
+    offer: "Fuel cells",
+    image: "/fundImages/ballard.jpg",
+    about:
+      "Ballard Power is the leading global provider of innovative clean energy fuel cell solutions that offer superior performance at a reduced operating cost.",
+  },
+];
+
 function Fund() {
   return (
-    <div className="mt-8">
+    <div className="mt-8 mx-8">
       <ContainerDevelopmentCard />
-      <div className="grid lg:grid-cols-1 gap-10 lg:ml-20 lg:mr-20 mt-8">
-        <div className="bg-gray-100 rounded overflow-hidden shadow-lg p-5">
-          <div className="text-xs text-black text-left pt-1 mb-1">
-            <span className="font-bold">Lorem ipsum dolor sit amet,</span>{" "}
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </div>
-        </div>
+      <h3 className="mt-20 text-lg leading-6 font-medium text-gray-900">
+        Portfolio
+      </h3>
+      <h1 className="mt-8 font-medium border-b-2 border-terra-purple-100">
+        Clean energy
+      </h1>
+      <div className="grid lg:grid-cols-3 gap-10 mt-4 mb-20">
+        {portfolioEnergy.map((company) => (
+          <CompanyCard
+            key={company.id}
+            name={company.company}
+            offer={company.offer}
+            about={company.about}
+            image={company.image}
+          />
+        ))}
       </div>
-
-      <div className="grid lg:grid-cols-3 gap-10 lg:ml-20 lg:mr-20 mt-10">
-        {portfolio.map((company) => (
+      <h1 className="mt-8 font-medium border-b-2 border-terra-purple-100">
+        Carbon capture and fuel cells
+      </h1>
+      <div className="grid lg:grid-cols-3 gap-10 mt-4">
+        {portfolioCarbonCapture.map((company) => (
           <CompanyCard
             key={company.id}
             name={company.company}

@@ -10,8 +10,8 @@ const firstOrDefault = (value: string | string[]) => {
 export default withSession<ApiHandler>(async function (req, res) {
   const tokens = req.session.get<UserAuthTokens>("auth");
   if (tokens) {
-    const pageSize = firstOrDefault(req.query.pageSize) || "100";
-    const pageToken = firstOrDefault(req.query.pageToken);
+    const pageSize = firstOrDefault(req.query.pageSize!) || "100";
+    const pageToken = firstOrDefault(req.query.pageToken!);
     try {
       const payload = await fetchTransactions(tokens.access_token, {
         pageSize: Number(pageSize),

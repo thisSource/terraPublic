@@ -21,8 +21,18 @@ function formatDate(date: string) {
   return dayjs(date).format("DD, MMMM, YYYY");
 }
 
-function formatMonth(date: string) {
-  return dayjs(date).format("MMMM");
+function formatTimeStamp(stamp: number) {
+  return dayjs(stamp).format("DD, MMMM, YYYY");
 }
 
-export { formatAmount, formatDate, formatMonth, amountHandler };
+function formatMonth(date: string) {
+  return dayjs(date).format("MMMM, YYYY");
+}
+
+export {
+  formatAmount,
+  formatDate,
+  formatTimeStamp,
+  formatMonth,
+  amountHandler,
+};

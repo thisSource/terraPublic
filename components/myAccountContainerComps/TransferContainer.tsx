@@ -1,5 +1,5 @@
-import { formatAmount, formatMonth } from "../../lib/helpers";
 import { useState } from "react";
+import { formatAmount, formatMonth } from "../../lib/helpers";
 
 interface Props {
   sumOfTrans: number;
@@ -11,14 +11,14 @@ interface Props {
 
 const transButton = {
   transferButtonStyle:
-    "px-5 py-1 text-gray-700 text-base bg-gray-300 font-semibold rounded-full hover:bg-yellow-300 hover:text-black transition cursor-pointer",
+    "px-5 py-4 mt-10 text-gray-700 text-base bg-gray-300 rounded-full hover:bg-purple-300 hover:text-black transition cursor-pointer",
   completedButtonStyle:
-    "px-5 py-1 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed",
+    "px-5 py-4 mt-10 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed",
   transferButtonText: "Transfer to savings",
-  completedButtonText: "Completed",
+  completedButtonText: "Transfer Completed",
 };
 
-function Transfer(props: Props) {
+export default function TransferContainer2(props: Props) {
   let [transferred, setTransferred] = useState(false);
   let [buttonStyle, setButtonStyle] = useState({
     style: transButton.transferButtonStyle,
@@ -35,35 +35,52 @@ function Transfer(props: Props) {
   }
 
   return (
-    <div className="py-2 lg:mr-80 md:mr-10">
-      <div className="py-4 flex flex-row items-center justify-between">
-        <span className="ml-2">
-          Transactions {formatMonth(props.currentMonth)}
-        </span>
-        <span>{formatAmount(props.sumOfTrans * -1)}</span>
-      </div>
-      <div className="ml-2 flex flex-row items-center justify-between">
-        <span>CO2 savings</span>
-        <span className="text-green-700">
-          {(props.sumOfTrans * 0.01 * props.co2perSEK * -1).toFixed(3)} Kg
-        </span>
-      </div>
-      <div className="py-4 flex flex-row items-center justify-between">
-        <button
-          className={buttonStyle.style}
-          disabled={transferred}
-          onClick={() => transferSavings()}
-        >
-          {buttonStyle.text}
-        </button>
-        <span className="text-green-700 font-semibold">
-          {formatAmount(props.sumOfTrans * 0.01 * -1)}
-        </span>
-      </div>
+    <div className="bg-gray-100 shadow overflow-hidden sm:rounded-md my-4">
+      <ul role="list" className="divide-y divide-gray-200">
+        <li key={props.currentMonth}>
+          <div className="flex items-center px-2 py-4 sm:px-6">
+            <div className="min-w-0 flex-1 flex items-center">
+              <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                <div>
+                  <p className="text-sm font-medium text-terra-purple-600 truncate">
+                    {formatMonth(props.currentMonth)}
+                  </p>
+                  <p className="mt-2 flex items-center text-sm text-gray-500">
+                    Monthly expenses {formatAmount(props.sumOfTrans * -1)}
+                  </p>
 
-      <div className="mt-2 border-b"></div>
+                  <p className="mt-2 flex items-center text-sm text-gray-500"></p>
+                </div>
+                <div className="md:block">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900">
+                      Transfer to your savings
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-terra-purple-600">
+                      {formatAmount(props.sumOfTrans * 0.01 * -1)}
+                    </p>
+                    <p className="mt-2 text-sm text-gray-500">
+                      {(props.sumOfTrans * 0.01 * -1 * props.co2perSEK).toFixed(
+                        2
+                      )}{" "}
+                      kg CO2
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="">
+              <button
+                className={buttonStyle.style}
+                disabled={transferred}
+                onClick={() => transferSavings()}
+              >
+                {buttonStyle.text}
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 }
-
-export default Transfer;
