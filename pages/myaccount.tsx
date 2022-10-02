@@ -45,7 +45,6 @@ function MyAccount({ userData, sessionData }: UserProps) {
       <div className="flex flex-row justify-between mb-10 text-lg">
         {sectionNames.map((section) => (
           <button
-
             key={section}
             className={
               section === activeSection ? styles.active : styles.default
