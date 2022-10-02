@@ -5,10 +5,13 @@ import Link from "next/link";
 import { useSearch } from "../../lib/hooks/useTransactionSearch";
 import TransferContainer from "./TransferContainer";
 
-function AccountComponent() {
+interface AccountProps {
+  balance: number;
+}
+
+function AccountComponent({ balance }: AccountProps) {
   let { data, isLoading } = useSearch();
-  // console.log(data);
-  let [savings, setSavings] = useState(0);
+  let [savings, setSavings] = useState(balance);
   let [co2dataValueSEK, setCo2dataValueSEK] = useState(0);
 
   async function fetchPortfolio() {
