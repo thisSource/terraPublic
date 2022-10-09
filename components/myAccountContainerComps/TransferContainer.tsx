@@ -12,19 +12,26 @@ interface Props {
   co2perSEK: number;
   match: boolean;
   user_id: string;
+  isCurrentMonth: boolean;
 }
 
 const transButton = {
   transferButtonStyle:
-    "px-20 py-4 mt-10 text-gray-700 text-base bg-gray-300 rounded-full hover:bg-purple-300 hover:text-black transition cursor-pointer",
+    "px-10 py-4 mt-10 text-gray-700 text-base bg-gray-300 rounded-full hover:bg-purple-300 hover:text-black transition cursor-pointer",
+  currentMonthButtonStyle:
+    "px-10 py-4 mt-10 text-gray-700 text-base bg-terra-orange rounded-full cursor-not-allowed",
   completedButtonStyle:
-    "px-5 py-4 mt-10 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed",
+    "px-10 py-4 mt-10 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed",
   transferButtonText: "Transfer to savings",
   completedButtonText: "Transfer Completed",
+  currentMonthButtonText: "Available next month",
 };
 
 export default function TransferContainer(transactionData: Props) {
   const router = useRouter();
+  let [isCurrentMonth, setIsCurrentMonth] = useState(
+    transactionData.isCurrentMonth
+  );
   let [transferred, setTransferred] = useState(transactionData.match);
   let [buttonStyle, setButtonStyle] = useState({
     style: transButton.transferButtonStyle,
@@ -37,6 +44,11 @@ export default function TransferContainer(transactionData: Props) {
         ? {
             style: transButton.completedButtonStyle,
             text: transButton.completedButtonText,
+          }
+        : isCurrentMonth
+        ? {
+            style: transButton.currentMonthButtonStyle,
+            text: transButton.currentMonthButtonText,
           }
         : {
             style: transButton.transferButtonStyle,
@@ -70,13 +82,15 @@ export default function TransferContainer(transactionData: Props) {
       router.reload(); // Kan denna funktion ersättas med annat?
   }
 
-  function transferSavings() {
-    transferred ? setTransferred(false) : setTransferred(true);
-    setButtonStyle({
-      style: transButton.completedButtonStyle,
-      text: transButton.completedButtonText,
-    });
-    postTransactionToSupabase(transactionData.value, transactionData.user_id);
+  function transferSavings(isCurrentMonthProps: boolean) {
+    if (!isCurrentMonthProps) {
+      transferred ? setTransferred(false) : setTransferred(true);
+      setButtonStyle({
+        style: transButton.completedButtonStyle,
+        text: transButton.completedButtonText,
+      });
+      postTransactionToSupabase(transactionData.value, transactionData.user_id);
+    }
   }
 
   return (
@@ -124,7 +138,7 @@ export default function TransferContainer(transactionData: Props) {
               <button
                 className={buttonStyle.style}
                 disabled={transferred}
-                onClick={() => transferSavings()}
+                onClick={() => transferSavings(isCurrentMonth)}
               >
                 {buttonStyle.text}
               </button>

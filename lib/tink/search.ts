@@ -112,6 +112,7 @@ interface Query {
 }
 
 interface PeriodAmount {
+  isCurrentMonth: boolean;
   balance: number;
   user_id: string;
   match: boolean;

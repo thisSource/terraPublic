@@ -52,7 +52,7 @@ function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
 
   const monthsForDisplay = [...data?.periodAmounts].reverse();
 
-  monthsForDisplay.forEach((month) => {
+  monthsForDisplay.forEach((month, index) => {
     month.match =
       transactionsMonthly.find(
         (monthTransaction: { year_month: string }) =>
@@ -60,7 +60,14 @@ function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
       ) != undefined;
     month.user_id = userData[0].user_id;
     month.balance = userData[0].balance;
+    if (index === 0) {
+      month.isCurrentMonth = true;
+    } else {
+      month.isCurrentMonth = false;
+    }
   });
+
+  // console.log(monthsForDisplay)
 
   return (
     <div className="">
@@ -72,7 +79,7 @@ function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
       <div className="mt-20">
         <h1 className="text-xl font-semibold text-gray-900">
           {" "}
-          Transfered to your savings
+          Transfer to your fund savings
         </h1>
         <div className="overflow-y-scroll scroll-smooth h-96">
           {monthsForDisplay.map((month) => (
@@ -86,6 +93,7 @@ function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
               match={month.match}
               user_id={month.user_id}
               balance={month.balance}
+              isCurrentMonth={month.isCurrentMonth}
             />
           ))}
         </div>
