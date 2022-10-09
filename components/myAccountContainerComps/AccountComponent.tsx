@@ -11,6 +11,7 @@ interface AccountProps {
     user_id: string;
   }[];
   transactionsMonthly: {
+    some(arg0: (item: any) => boolean): any;
     find(arg0: (monthTransaction: { year_month: string }) => boolean): unknown;
     map(arg0: (month: any) => void): unknown;
     balance: number;
@@ -50,20 +51,15 @@ function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
     );
   }
 
-  const monthsForDisplay = [...data?.periodAmounts].reverse();
+  let monthsForDisplay = [...data?.periodAmounts].reverse();
 
-  monthsForDisplay.forEach((month, index) => {
-    month.match =
-      transactionsMonthly.find(
-        (monthTransaction: { year_month: string }) =>
-          monthTransaction.year_month == month.key
-      ) != undefined;
-    month.user_id = userData[0].user_id;
-    month.balance = userData[0].balance;
-    index === 0
-      ? (month.isCurrentMonth = true)
-      : (month.isCurrentMonth = false);
-  });
+  monthsForDisplay = monthsForDisplay.map((month, index) => ({
+    ...month,
+    user_id: userData[0].user_id,
+    balance: userData[0].balance,
+    match: transactionsMonthly.some((item) => item.year_month === month.key),
+    isCurrentMonth: transactionsMonthly.some((item) => index === 0),
+  }));
 
   return (
     <div className="">
