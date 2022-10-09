@@ -5,9 +5,18 @@ import TransferComponent from "../components/myAccountContainerComps/TransferCom
 
 interface UserProps {
   userData: {
-    data: { id: number; email: string; balance: number; full_name: string }[];
+    user_id: string;
+    email: string;
+    balance: number;
+    full_name: string;
+  }[];
+  transactionsMonthly: {
+    year_month: string;
+    value: number;
+    transaction_monthly_id: string;
+    user_id: string;
   };
-  sessionData: {
+  session: {
     user: {
       name: string;
       email: string;
@@ -29,15 +38,17 @@ const styles = {
   active:
     "border-terra-purple-600 text-terra-purple-600 w-1/4 py-4 px-1 text-center border-b-2 font-medium",
 };
-function MyAccount({ userData, sessionData }: UserProps) {
+function MyAccount({ userData, transactionsMonthly, session }: UserProps) {
   const sectionNames = Object.keys(sections);
   const [activeSection, setActiveSection] =
     useState<keyof typeof sections>("account");
-  const SectionComponent = sections[activeSection] || sections.account;
+  //Får inte till typen här
+  const SectionComponent: any = sections[activeSection] || sections.account;
 
   const defaultProps = {
-    balance: userData.data[0].balance,
-    session: sessionData,
+    userData: userData,
+    transactionsMonthly: transactionsMonthly,
+    session: session,
   };
 
   return (
@@ -56,7 +67,7 @@ function MyAccount({ userData, sessionData }: UserProps) {
         ))}
       </div>
 
-      <SectionComponent value={0} {...defaultProps} />
+      <SectionComponent {...defaultProps} />
     </div>
   );
 }

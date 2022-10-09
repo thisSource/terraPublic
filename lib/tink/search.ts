@@ -112,6 +112,9 @@ interface Query {
 }
 
 interface PeriodAmount {
+  balance: number;
+  user_id: string;
+  match: boolean;
   key: string;
   value: number;
 }

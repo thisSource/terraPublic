@@ -6,12 +6,23 @@ import { useSearch } from "../../lib/hooks/useTransactionSearch";
 import TransferContainer from "./TransferContainer";
 
 interface AccountProps {
-  balance: number;
+  userData: {
+    balance: number;
+    user_id: string;
+  }[];
+  transactionsMonthly: {
+    find(arg0: (monthTransaction: { year_month: string }) => boolean): unknown;
+    map(arg0: (month: any) => void): unknown;
+    balance: number;
+    yearMonth: string;
+    value: number;
+    user_id: string;
+  };
 }
 
-function AccountComponent({ balance }: AccountProps) {
+function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
   let { data, isLoading } = useSearch();
-  let [savings, setSavings] = useState(balance);
+  let [savings, setSavings] = useState(userData[0].balance);
   let [co2dataValueSEK, setCo2dataValueSEK] = useState(0);
 
   async function fetchPortfolio() {
@@ -30,7 +41,7 @@ function AccountComponent({ balance }: AccountProps) {
   if (data?.periodAmounts === undefined || data?.periodAmounts.length === 0) {
     return (
       <div className="h-full my-44 justify-center flex flex-col items-center">
-        <Link href="/login">
+        <Link href="/signin-bank">
           <a className="underline cursor-pointer text-yellow-700">
             Please login to view your transactions
           </a>
@@ -40,6 +51,16 @@ function AccountComponent({ balance }: AccountProps) {
   }
 
   const monthsForDisplay = [...data?.periodAmounts].reverse();
+
+  monthsForDisplay.forEach((month) => {
+    month.match =
+      transactionsMonthly.find(
+        (monthTransaction: { year_month: string }) =>
+          monthTransaction.year_month == month.key
+      ) != undefined;
+    month.user_id = userData[0].user_id;
+    month.balance = userData[0].balance;
+  });
 
   return (
     <div className="">
@@ -57,11 +78,14 @@ function AccountComponent({ balance }: AccountProps) {
           {monthsForDisplay.map((month) => (
             <TransferContainer
               key={month.key}
-              sumOfTrans={month.value}
+              sumTransactions={month.value}
               currentMonth={month.key}
               updateSavings={setSavings}
-              value={savings + month.value * 0.01 * -1}
+              value={month.value * 0.01 * -1}
               co2perSEK={co2dataValueSEK}
+              match={month.match}
+              user_id={month.user_id}
+              balance={month.balance}
             />
           ))}
         </div>

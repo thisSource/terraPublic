@@ -10,8 +10,6 @@ const login = withSession<ApiHandler>(async function (req, res) {
   }
 
   try {
-    // this endpoint will act as a refresh endpoint for now.
-    // The initial login exchance takes place on the callback.tsx
     const payload = await refreshToken(tokens.refresh_token);
     req.session.set<UserAuthTokens>("auth", {
       access_token: payload.access_token,
