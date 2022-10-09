@@ -60,14 +60,10 @@ function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
       ) != undefined;
     month.user_id = userData[0].user_id;
     month.balance = userData[0].balance;
-    if (index === 0) {
-      month.isCurrentMonth = true;
-    } else {
-      month.isCurrentMonth = false;
-    }
+    index === 0
+      ? (month.isCurrentMonth = true)
+      : (month.isCurrentMonth = false);
   });
-
-  // console.log(monthsForDisplay)
 
   return (
     <div className="">
