@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatAmount, formatMonth } from "../../lib/helpers";
 import { supabase } from "../../lib/auth/supabaseClient";
 import { useRouter } from "next/router";
@@ -15,48 +15,12 @@ interface Props {
   isCurrentMonth: boolean;
 }
 
-const transButton = {
-  transferButtonStyle:
-    "px-10 py-4 mt-10 text-gray-700 text-base bg-gray-300 rounded-full hover:bg-purple-300 hover:text-black transition cursor-pointer",
-  currentMonthButtonStyle:
-    "px-10 py-4 mt-10 text-gray-700 text-base bg-terra-orange rounded-full cursor-not-allowed",
-  completedButtonStyle:
-    "px-10 py-4 mt-10 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed",
-  transferButtonText: "Transfer to savings",
-  completedButtonText: "Transfer Completed",
-  currentMonthButtonText: "Available next month",
-};
-
 export default function TransferContainer(transactionData: Props) {
   const router = useRouter();
   let [isCurrentMonth, setIsCurrentMonth] = useState(
     transactionData.isCurrentMonth
   );
   let [transferred, setTransferred] = useState(transactionData.match);
-  let [buttonStyle, setButtonStyle] = useState({
-    style: transButton.transferButtonStyle,
-    text: transButton.transferButtonText,
-  });
-
-  useEffect(() => {
-    setButtonStyle(
-      transferred
-        ? {
-            style: transButton.completedButtonStyle,
-            text: transButton.completedButtonText,
-          }
-        : isCurrentMonth
-        ? {
-            style: transButton.currentMonthButtonStyle,
-            text: transButton.currentMonthButtonText,
-          }
-        : {
-            style: transButton.transferButtonStyle,
-            text: transButton.transferButtonText,
-          }
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   async function postTransactionToSupabase(
     transactionValue: number,
@@ -71,24 +35,30 @@ export default function TransferContainer(transactionData: Props) {
     ]);
 
     error
-      ? console.log("error")
+      ? console.log("error updating monthly transaction")
       : ({ data, error } = await supabase
           .from("users")
-          .update([
-            { balance: transactionData.balance + transactionData.value },
-          ])
+          .select("balance")
           .match({ user_id: user_id }));
-    error ? console.log("error2") : console.log("transaction success"),
-      router.reload(); // Kan denna funktion ersättas med annat?
+    let currentBalance = data![0].balance;
+
+    error
+      ? console.log("error getting current balance")
+      : ({ data, error } = await supabase
+          .from("users")
+          .update([{ balance: currentBalance + transactionData.value }])
+          .match({ user_id: user_id }));
+    error ? console.log("error2") : console.log("transaction success");
+    !error
+      ? transactionData.updateSavings(currentBalance + transactionData.value)
+      : console.log("error in completing transaction");
+
+    return;
   }
 
   function transferSavings(isCurrentMonthProps: boolean) {
     if (!isCurrentMonthProps) {
       transferred ? setTransferred(false) : setTransferred(true);
-      setButtonStyle({
-        style: transButton.completedButtonStyle,
-        text: transButton.completedButtonText,
-      });
       postTransactionToSupabase(transactionData.value, transactionData.user_id);
     }
   }
@@ -136,11 +106,21 @@ export default function TransferContainer(transactionData: Props) {
             </div>
             <div className="">
               <button
-                className={buttonStyle.style}
+                className={`${
+                  transferred
+                    ? "px-10 py-4 mt-10 text-gray-700 text-base italic bg-green-300 font-base rounded-full cursor-not-allowed"
+                    : isCurrentMonth
+                    ? "px-10 py-4 mt-10 text-gray-700 text-base bg-terra-orange rounded-full cursor-not-allowed"
+                    : "px-10 py-4 mt-10 text-gray-700 text-base bg-gray-300 rounded-full hover:bg-purple-300 hover:text-black transition cursor-pointer"
+                }`}
                 disabled={transferred}
                 onClick={() => transferSavings(isCurrentMonth)}
               >
-                {buttonStyle.text}
+                {transferred
+                  ? "Transfer Completed"
+                  : isCurrentMonth
+                  ? "Available next month"
+                  : "Transfer to savings"}
               </button>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import getTinkLinkUrl from "../lib/tink/getTinkLinkUrl";
 import Image from "next/image";
-import LogoNavbarText from "../public/logos/terra/studioAsset 8.png";
+import LogoNavbarText from "../public/logos/terra/terra.png";
 
 const steps = [
   { name: "Step 1", href: "/signin", status: "previous" },

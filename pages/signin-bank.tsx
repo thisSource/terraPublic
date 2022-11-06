@@ -14,7 +14,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-          "/api/auth/signin?callbackUrl=http://localhost:3000/signin",
+          "/api/auth/signin?callbackUrl=http://localhost:3000/signin" ||
+          `/api/auth/signin?callbackUrl=${process.env.NEXT_AUTH_LOGIN_CALLBACK_URL}`,
         permanent: false,
       },
     };

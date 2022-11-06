@@ -9,7 +9,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-          "/api/auth/signin?callbackUrl=http://localhost:3000/signin",
+          "/api/auth/signin?callbackUrl=http://localhost:3000/signin" ||
+          `/api/auth/signin?callbackUrl=${process.env.NEXT_AUTH_LOGIN_CALLBACK_URL}`,
         permanent: false,
       },
     };
@@ -39,4 +40,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 export default getServerSideProps;
 
-//Utterliggare en check behöver göras mot valt bankkonto. Behöver byttas ut i sign-up del där tink integreras så man kan välja bankkonto.
+//Utterliggare en check behöver göras mot valt bankkonto. Behöver bytas ut i sign-up del där tink integreras så man kan välja bankkonto.

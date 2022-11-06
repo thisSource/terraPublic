@@ -29,7 +29,6 @@ const steps = [
 ];
 
 export default function SignIn({ providers }: ProviderProps) {
-  console.log(providers);
   return (
     <>
       <div className="flex min-h-full">

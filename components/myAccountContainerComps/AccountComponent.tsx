@@ -14,7 +14,6 @@ interface AccountProps {
     some(arg0: (item: any) => boolean): any;
     find(arg0: (monthTransaction: { year_month: string }) => boolean): unknown;
     map(arg0: (month: any) => void): unknown;
-    balance: number;
     yearMonth: string;
     value: number;
     user_id: string;
@@ -58,7 +57,7 @@ function AccountComponent({ userData, transactionsMonthly }: AccountProps) {
     user_id: userData[0].user_id,
     balance: userData[0].balance,
     match: transactionsMonthly.some((item) => item.year_month === month.key),
-    isCurrentMonth: transactionsMonthly.some((item) => index === 0),
+    isCurrentMonth: index === 0,
   }));
 
   return (

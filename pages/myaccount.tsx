@@ -11,9 +11,11 @@ interface UserProps {
     full_name: string;
   }[];
   transactionsMonthly: {
-    year_month: string;
+    some(arg0: (item: any) => boolean): any;
+    find(arg0: (monthTransaction: { year_month: string }) => boolean): unknown;
+    map(arg0: (month: any) => void): unknown;
+    yearMonth: string;
     value: number;
-    transaction_monthly_id: string;
     user_id: string;
   };
   session: {
@@ -43,7 +45,7 @@ function MyAccount({ userData, transactionsMonthly, session }: UserProps) {
   const [activeSection, setActiveSection] =
     useState<keyof typeof sections>("account");
   //Får inte till typen här
-  const SectionComponent: any = sections[activeSection] || sections.account;
+  const SectionComponent = sections[activeSection] || sections.account;
 
   const defaultProps = {
     userData: userData,
@@ -67,7 +69,7 @@ function MyAccount({ userData, transactionsMonthly, session }: UserProps) {
         ))}
       </div>
 
-      <SectionComponent {...defaultProps} />
+      <SectionComponent value={0} {...defaultProps} />
     </div>
   );
 }
